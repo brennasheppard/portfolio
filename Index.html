@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brenna Sheppard - Portfolio</title>
+    <meta name="description" content="Technical documentation specialist. Expertise in device implementation and customer success enablement. Based in Texas.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors">
+    <nav class="fixed top-0 w-full bg-white dark:bg-gray-800 shadow-md z-50">
+        <ul class="flex justify-center space-x-8 py-4">
+            <li><a href="#home" class="hover:underline">Home</a></li>
+            <li><a href="#about" class="hover:underline">About</a></li>
+            <li><a href="#projects" class="hover:underline">Projects</a></li>
+            <li><a href="#contact" class="hover:underline">Contact</a></li>
+        </ul>
+        <button id="dark-toggle" class="absolute right-4 top-4 p-2">🌙</button>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-6xl font-bold mb-4">Brenna Sheppard</h1>
+            <p class="text-2xl">Technical Documentation & Implementation Specialist</p>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 px-8">
+        <h2 class="text-4xl font-bold mb-8 text-center">About Me</h2>
+        <p class="max-w-2xl mx-auto text-lg">Based in Texas. Available for contract roles in technical documentation, device implementation, or customer success enablement. Skills: SOP creation, runbooks, training materials.</p>
+    </section>
+
+    <section id="projects" class="py-20 px-8 bg-gray-100 dark:bg-gray-800">
+        <h2 class="text-4xl font-bold mb-8 text-center">Projects</h2>
+        <div id="project-list" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Dynamic load -->
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 px-8">
+        <h2 class="text-4xl font-bold mb-8 text-center">Contact</h2>
+        <p class="text-center">
+            Email: <a href="mailto:hello@brennasheppard.com">hello@brennasheppard.com</a> · 
+            <a href="mailto:info@brennasheppard.com">info@brennasheppard.com</a> · 
+            <a href="mailto:contact@brennasheppard.me">contact@brennasheppard.me</a><br>
+            LinkedIn: <a href="https://www.linkedin.com/in/brenna-sheppard">linkedin.com/in/brenna-sheppard</a>
+        </p>
+        <div class="text-center mt-4">
+            <a href="resume.pdf" download class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Download Resume</a>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
