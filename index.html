@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,49 +17,132 @@
       gtag('config', 'G-10MJPMHM8X');
     </script>
 </head>
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors">
-    <nav class="fixed top-0 w-full bg-white dark:bg-gray-800 shadow-md z-50">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white transition-colors">
+    <nav class="fixed top-0 w-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-lg z-50">
         <ul class="flex justify-center space-x-8 py-4">
-            <li><a href="#home" class="hover:underline">Home</a></li>
-            <li><a href="#about" class="hover:underline">About</a></li>
-            <li><a href="#projects" class="hover:underline">Projects</a></li>
-            <li><a href="#contact" class="hover:underline">Contact</a></li>
+            <li><a href="#home" class="hover:underline hover:text-blue-600 transition">Home</a></li>
+            <li><a href="#about" class="hover:underline hover:text-blue-600 transition">About</a></li>
+            <li><a href="#skills" class="hover:underline hover:text-blue-600 transition">Skills</a></li>
+            <li><a href="#certifications" class="hover:underline hover:text-blue-600 transition">Certifications</a></li>
+            <li><a href="#projects" class="hover:underline hover:text-blue-600 transition">Projects</a></li>
+            <li><a href="#contact" class="hover:underline hover:text-blue-600 transition">Contact</a></li>
         </ul>
-        <button id="dark-toggle" class="absolute right-4 top-4 p-2">🌙</button>
+        <button id="dark-toggle" class="absolute right-4 top-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">🌙</button>
     </nav>
 
-    <section id="home" class="min-h-screen flex items-center justify-center">
-        <div class="text-center">
-            <h1 class="text-6xl font-bold mb-4">Brenna Sheppard</h1>
-            <p class="text-2xl">EdTech Trainer & Implementation Specialist</p>
+    <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+        <div class="text-center px-4">
+            <h1 class="text-6xl md:text-7xl font-bold mb-4 animate-fade-in">Brenna Sheppard</h1>
+            <p class="text-2xl md:text-3xl mb-8">EdTech Trainer & Implementation Specialist</p>
+            <a href="#about" class="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">Learn More</a>
         </div>
     </section>
 
     <section id="about" class="py-20 px-8">
-        <h2 class="text-4xl font-bold mb-8 text-center">About Me</h2>
-        <p class="max-w-2xl mx-auto text-lg">Texas-based EdTech professional with 5+ years at Clear Touch Interactive. Lead trainer for interactive panels, creating SOPs, runbooks, and analytics for district implementations. Expertise in customer success enablement, device training, and data-driven PD. Seeking remote CSM/PM roles.</p>
-    </section>
-
-    <section id="projects" class="py-20 px-8 bg-gray-100 dark:bg-gray-800">
-        <h2 class="text-4xl font-bold mb-8 text-center">Projects</h2>
-        <div id="project-list" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Dynamic load -->
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">About Me</h2>
+            <p class="text-lg leading-relaxed max-w-2xl mx-auto">Texas-based EdTech professional with 5+ years at Clear Touch Interactive. Lead trainer for interactive panels, creating SOPs and analytics for district implementations. Expertise in customer success enablement, device training, and data-driven PD. Seeking remote CSM/PM roles.</p>
         </div>
     </section>
 
-    <section id="contact" class="py-20 px-8">
-        <h2 class="text-4xl font-bold mb-8 text-center">Contact</h2>
-        <p class="text-center">
-            Email: <a href="mailto:hello@brennasheppard.com">hello@brennasheppard.com</a> · 
-            <a href="mailto:info@brennasheppard.com">info@brennasheppard.com</a> · 
-            <a href="mailto:contact@brennasheppard.me">contact@brennasheppard.me</a><br>
-            LinkedIn: <a href="https://www.linkedin.com/in/brenna-sheppard">linkedin.com/in/brenna-sheppard</a>
-        </p>
-        <div class="text-center mt-4">
-            <a href="resume.pdf" download class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Download Resume</a>
+    <section id="skills" class="py-20 px-8 bg-white/50 dark:bg-gray-800/50">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold mb-2">Technical Documentation</h3>
+                    <p>SOPs, Guides, Manuals</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold mb-2">Device Implementation</h3>
+                    <p>Interactive Panels, LMS Integration</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold mb-2">Training & PD</h3>
+                    <p>Workshops, Analytics, ROI Tracking</p>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold mb-2">Tools & Tech</h3>
+                    <p>Google Apps Script, Pandas, AWS Basics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="py-20 px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+                    <img src="https://www.gstatic.com/atari/images/google-certified-educator-level2-badge.svg" alt="Google Certified Educator Level 2" class="w-16 h-16 mx-auto mb-4">
+                    <strong class="text-xl block mb-1">Google Certified Educator Level 2</strong>
+                    <small class="text-gray-600 dark:text-gray-300">Google, 2023</small>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+                    <img src="https://d1.awsstatic.com/training-and-certification/badges/aws-certified-cloud-practitioner_2023-06.png" alt="AWS Certified Cloud Practitioner" class="w-16 h-16 mx-auto mb-4">
+                    <strong class="text-xl block mb-1">AWS Certified Cloud Practitioner</strong>
+                    <small class="text-gray-600 dark:text-gray-300">Amazon Web Services, 2024</small>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+                    <img src="https://via.placeholder.com/64x64/4F46E5/FFFFFF?text=CT" alt="Clear Touch Certified Trainer" class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-500">
+                    <strong class="text-xl block mb-1">Clear Touch Certified Trainer</strong>
+                    <small class="text-gray-600 dark:text-gray-300">Clear Touch Interactive, 2022</small>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+                    <img src="https://via.placeholder.com/64x64/059669/FFFFFF?text=CP" alt="Data Analysis with Python" class="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500">
+                    <strong class="text-xl block mb-1">Data Analysis with Python</strong>
+                    <small class="text-gray-600 dark:text-gray-300">Coursera, 2023</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 px-8 bg-white/50 dark:bg-gray-800/50">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-indigo-500 to-blue-600 text-white p-8 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold mb-3">Clear Touch Panel Training SOP</h3>
+                    <p class="mb-4">Developed standard operating procedures for deploying 500+ interactive panels in K-12 districts, including troubleshooting guides and video tutorials.</p>
+                    <a href="https://github.com/brennasheppard/clear-touch-sop" class="bg-white text-indigo-600 px-4 py-2 rounded-full font-bold hover:bg-gray-100 transition inline-block">View on GitHub</a>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-emerald-600 text-white p-8 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold mb-3">District Implementation Analytics Dashboard</h3>
+                    <p class="mb-4">Built Google Sheets automation with Apps Script to track device adoption and training ROI, analyzing data from 10+ schools.</p>
+                    <a href="https://github.com/brennasheppard/implementation-analytics" class="bg-white text-green-600 px-4 py-2 rounded-full font-bold hover:bg-gray-100 transition inline-block">View on GitHub</a>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-violet-600 text-white p-8 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold mb-3">Customer Success Enablement Toolkit</h3>
+                    <p class="mb-4">Created modular training materials for admins, including PD sessions on panel integration with LMS systems like Canvas.</p>
+                    <a href="https://github.com/brennasheppard/enablement-toolkit" class="bg-white text-purple-600 px-4 py-2 rounded-full font-bold hover:bg-gray-100 transition inline-block">View on GitHub</a>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-red-600 text-white p-8 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold mb-3">Data-Driven PD Framework</h3>
+                    <p class="mb-4">Designed framework using Pandas for visualizing training effectiveness, reducing support tickets by 30% in pilot districts.</p>
+                    <a href="https://github.com/brennasheppard/pd-framework" class="bg-white text-orange-600 px-4 py-2 rounded-full font-bold hover:bg-gray-100 transition inline-block">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 px-8 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-gray-800 dark:to-gray-900">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-pink-600 to-red-600 bg-clip-text text-transparent">Contact</h2>
+            <p class="text-lg mb-8">
+                Email: <a href="mailto:hello@brennasheppard.com" class="text-blue-600 hover:underline">hello@brennasheppard.com</a> · 
+                <a href="mailto:info@brennasheppard.com" class="text-blue-600 hover:underline">info@brennasheppard.com</a> · 
+                <a href="mailto:contact@brennasheppard.me" class="text-blue-600 hover:underline">contact@brennasheppard.me</a><br>
+                LinkedIn: <a href="https://www.linkedin.com/in/brenna-sheppard" class="text-blue-600 hover:underline">linkedin.com/in/brenna-sheppard</a>
+            </p>
+            <a href="resume.pdf" download class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-full font-bold hover:shadow-lg transition">Download Resume</a>
         </div>
     </section>
 
     <script src="js/script.js"></script>
+    <style>
+        @keyframes fade-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fade-in 1s ease-out; }
+    </style>
 </body>
 </html>
+
