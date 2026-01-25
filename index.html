@@ -908,4 +908,189 @@
                     <span class="skill-tag">Leadership</span>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Certifications Tab -->
+    <div class="tab-container" id="certifications">
+        <div class="section-header">
+            <h2>Certifications & Credentials</h2>
+            <p>Continuously expanding expertise through professional development and certification</p>
+        </div>
+        <div class="card-grid">
+            <div class="cert-card">
+                <div class="cert-logo">G</div>
+                <h3>Google Educator Level 1</h3>
+                <p>Google</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-logo">G</div>
+                <h3>Google Educator Level 2</h3>
+                <p>Google</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-logo">AWS</div>
+                <h3>AWS Cloud Practitioner</h3>
+                <p>Amazon Web Services</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-logo">🍎</div>
+                <h3>Apple Teacher</h3>
+                <p>Apple</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-logo">PLTW</div>
+                <h3>PLTW Launch Educator</h3>
+                <p>Project Lead The Way</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-logo">ESL</div>
+                <h3>ESL Supplemental</h3>
+                <p>Texas Education Agency</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-logo">G</div>
+                <h3>Google Project Management</h3>
+                <p>Coursera (In Progress)</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-logo">PMI</div>
+                <h3>CAPM</h3>
+                <p>PMI (Upcoming)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Tab -->
+    <div class="tab-container" id="contact">
+        <div class="section-header">
+            <h2>Let's Connect</h2>
+            <p>Open to opportunities in corporate training, instructional design, consulting, and L&D roles</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Get In Touch</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">I'm open to full-time positions, contract work, and consulting opportunities. Let's discuss how I can add value to your organization.</p>
+                <div class="contact-links">
+                    <a href="mailto:hello@brennasheppard.com" class="contact-link">
+                        📧 hello@brennasheppard.com
+                    </a>
+                    <a href="mailto:info@brennasheppard.com" class="contact-link">
+                        📧 info@brennasheppard.com
+                    </a>
+                    <a href="mailto:contact@brennasheppard.me" class="contact-link">
+                        📧 contact@brennasheppard.me
+                    </a>
+                    <a href="https://linkedin.com/in/brenna-sheppard" class="contact-link" target="_blank" rel="noopener noreferrer">
+                        💼 linkedin.com/in/brenna-sheppard
+                    </a>
+                </div>
+            </div>
+            <div class="contact-card">
+                <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Download Resume</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Get a comprehensive overview of my experience, skills, and accomplishments.</p>
+                <a href="BSheppardresume2025.pdf" class="btn btn-primary" download style="display: block; text-align: center;">Download Resume (PDF)</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Brenna Sheppard. All rights reserved.</p>
+</footer>
+
+<script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+        themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    // Tab Navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    const tabContainers = document.querySelectorAll('.tab-container');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetTab = link.getAttribute('data-tab');
+            
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Hide all tabs
+            tabContainers.forEach(tab => tab.classList.remove('active'));
+            
+            // Show target tab
+            document.getElementById(targetTab).classList.add('active');
+            
+            // Close mobile menu
+            closeMenu();
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinksContainer = document.getElementById('navLinks');
+    const header = document.getElementById('header');
+    let menuTimer;
+
+    menuToggle.addEventListener('click', () => {
+        const isActive = navLinksContainer.classList.toggle('active');
+        
+        if (isActive) {
+            clearTimeout(menuTimer);
+            menuTimer = setTimeout(() => {
+                closeMenu();
+            }, 7000);
+        } else {
+            clearTimeout(menuTimer);
+        }
+    });
+
+    function closeMenu() {
+        navLinksContainer.classList.remove('active');
+        clearTimeout(menuTimer);
+    }
+
+    // Hide menu on scroll
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (navLinksContainer.classList.contains('active')) {
+            closeMenu();
+        }
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            header.classList.add('hidden');
+        } else {
+            header.classList.remove('hidden');
+        }
+        
+        lastScrollTop = scrollTop;
+    }, false);
+</script>
 ```
+
+</body>
+</html>
