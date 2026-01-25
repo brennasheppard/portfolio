@@ -15,27 +15,27 @@
 
 ```
     :root {
-        --bg-primary: #f5f1eb;
-        --bg-secondary: #ffffff;
-        --bg-card: #fdfcfa;
-        --text-primary: #1f1f1f;
-        --text-secondary: #5a5550;
-        --accent: #d97706;
-        --accent-hover: #b45309;
-        --border: #d4cdc3;
-        --shadow: rgba(0, 0, 0, 0.1);
+        --bg-primary: #1a1612;
+        --bg-secondary: #2a2218;
+        --bg-card: #342b21;
+        --text-primary: #f5ebe0;
+        --text-secondary: #d4c5b0;
+        --accent: #c87941;
+        --accent-hover: #a66335;
+        --border: #4a3f32;
+        --shadow: rgba(0, 0, 0, 0.3);
     }
 
-    [data-theme="dark"] {
-        --bg-primary: #1a1614;
-        --bg-secondary: #2a2420;
-        --bg-card: #332d28;
-        --text-primary: #f5f1eb;
-        --text-secondary: #c7bdb0;
-        --accent: #fb923c;
-        --accent-hover: #f97316;
-        --border: #463f38;
-        --shadow: rgba(0, 0, 0, 0.4);
+    [data-theme="light"] {
+        --bg-primary: #f5ebe0;
+        --bg-secondary: #ede1d2;
+        --bg-card: #faf6f0;
+        --text-primary: #2a2218;
+        --text-secondary: #5a4f42;
+        --accent: #c87941;
+        --accent-hover: #a66335;
+        --border: #d4c5b0;
+        --shadow: rgba(42, 34, 24, 0.1);
     }
 
     body {
@@ -116,25 +116,33 @@
         padding: 0.5rem;
     }
 
+    /* Theme Toggle - Separate from menu */
+    .theme-toggle-container {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 1001;
+    }
+
     .theme-toggle {
         background: var(--accent);
         border: none;
         color: white;
-        width: 40px;
-        height: 40px;
+        width: 56px;
+        height: 56px;
         border-radius: 50%;
         cursor: pointer;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
-        flex-shrink: 0;
+        box-shadow: 0 4px 12px var(--shadow);
     }
 
     .theme-toggle:hover {
         background: var(--accent-hover);
-        transform: rotate(180deg);
+        transform: scale(1.1) rotate(180deg);
     }
 
     /* Dashboard Container */
@@ -169,6 +177,11 @@
         border-radius: 16px;
         box-shadow: 0 4px 20px var(--shadow);
         border: 1px solid var(--border);
+        transition: transform 0.3s ease;
+    }
+
+    .hero-card:hover {
+        transform: translateY(-5px);
     }
 
     .hero-card h1 {
@@ -248,6 +261,12 @@
         background: var(--bg-card);
         border-radius: 12px;
         border-left: 4px solid var(--accent);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+
+    .stat-item:hover {
+        transform: translateX(5px);
     }
 
     .stat-item h3 {
@@ -276,10 +295,11 @@
         box-shadow: 0 4px 20px var(--shadow);
         border: 1px solid var(--border);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
     }
 
     .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px);
         box-shadow: 0 8px 30px var(--shadow);
     }
 
@@ -371,7 +391,7 @@
         color: var(--text-primary);
         text-decoration: none;
         font-size: 1.05rem;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
         gap: 0.75rem;
@@ -384,16 +404,7 @@
     .contact-link:hover {
         color: var(--accent);
         border-color: var(--accent);
-    }
-
-    .email-note {
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        font-style: italic;
-        margin-top: 1rem;
-        padding: 1rem;
-        background: var(--bg-card);
-        border-radius: 8px;
+        transform: translateX(5px);
     }
 
     /* About Section */
@@ -456,6 +467,51 @@
         flex-shrink: 0;
     }
 
+    /* Certification Cards with Logos */
+    .cert-card {
+        background: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px var(--shadow);
+        border: 1px solid var(--border);
+        transition: transform 0.3s ease;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .cert-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .cert-logo {
+        width: 64px;
+        height: 64px;
+        background: var(--bg-card);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--accent);
+        border: 2px solid var(--border);
+    }
+
+    .cert-card h3 {
+        color: var(--text-primary);
+        font-size: 1.2rem;
+        margin: 0;
+    }
+
+    .cert-card p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
     footer {
         background: var(--bg-secondary);
         text-align: center;
@@ -512,6 +568,16 @@
         .dashboard {
             padding: 1.5rem 1rem;
         }
+
+        .theme-toggle-container {
+            bottom: 1rem;
+            right: 1rem;
+        }
+
+        .theme-toggle {
+            width: 48px;
+            height: 48px;
+        }
     }
 
     @keyframes fadeIn {
@@ -539,6 +605,52 @@
         color: var(--text-secondary);
         font-size: 1.05rem;
     }
+
+    /* Interactive Quick Actions */
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .quick-action {
+        background: var(--bg-secondary);
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px var(--shadow);
+        border: 1px solid var(--border);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .quick-action:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+    }
+
+    .quick-action-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .quick-action h4 {
+        color: var(--text-primary);
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .quick-action p {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+        .quick-actions {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 ```
 
@@ -555,16 +667,18 @@
                 <li><a class="nav-link" data-tab="skills">Skills</a></li>
                 <li><a class="nav-link" data-tab="certifications">Certifications</a></li>
                 <li><a class="nav-link" data-tab="contact">Contact</a></li>
-                <li>
-                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                        <span id="themeIcon">🌙</span>
-                    </button>
-                </li>
             </ul>
         </nav>
     </header>
 
 ```
+<!-- Theme Toggle - Separate from Menu -->
+<div class="theme-toggle-container">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">☀️</span>
+    </button>
+</div>
+
 <div class="dashboard">
     <!-- Home Tab -->
     <div class="tab-container active" id="home">
@@ -594,16 +708,35 @@
             </div>
         </div>
 
+        <!-- Interactive Quick Actions -->
+        <div class="quick-actions">
+            <div class="quick-action nav-link" data-tab="expertise">
+                <div class="quick-action-icon">🎯</div>
+                <h4>View Expertise</h4>
+                <p>Training & Design</p>
+            </div>
+            <div class="quick-action nav-link" data-tab="skills">
+                <div class="quick-action-icon">💼</div>
+                <h4>Browse Skills</h4>
+                <p>Technologies & Methods</p>
+            </div>
+            <div class="quick-action nav-link" data-tab="certifications">
+                <div class="quick-action-icon">📜</div>
+                <h4>See Credentials</h4>
+                <p>Certifications</p>
+            </div>
+        </div>
+
         <div class="card-grid">
-            <div class="card">
+            <div class="card nav-link" data-tab="expertise">
                 <h3><span class="card-icon">🎯</span> Training & Facilitation</h3>
                 <p>Expert facilitator delivering engaging learning experiences for adult audiences in virtual and in-person settings.</p>
             </div>
-            <div class="card">
+            <div class="card nav-link" data-tab="expertise">
                 <h3><span class="card-icon">📐</span> Instructional Design</h3>
                 <p>Systematic approach using ADDIE, SAM, and other ID models to create effective learning solutions.</p>
             </div>
-            <div class="card">
+            <div class="card nav-link" data-tab="expertise">
                 <h3><span class="card-icon">💻</span> Educational Technology</h3>
                 <p>Technology integration expertise with LMS platforms, authoring tools, and virtual training systems.</p>
             </div>
@@ -775,183 +908,4 @@
                     <span class="skill-tag">Leadership</span>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Certifications Tab -->
-    <div class="tab-container" id="certifications">
-        <div class="section-header">
-            <h2>Certifications & Credentials</h2>
-            <p>Continuously expanding expertise through professional development and certification</p>
-        </div>
-        <div class="card-grid">
-            <div class="card">
-                <h3>🎓 Google Educator Level 1</h3>
-                <p>Google</p>
-            </div>
-            <div class="card">
-                <h3>🎓 Google Educator Level 2</h3>
-                <p>Google</p>
-            </div>
-            <div class="card">
-                <h3>☁️ AWS Cloud Practitioner</h3>
-                <p>Amazon Web Services</p>
-            </div>
-            <div class="card">
-                <h3>🍎 Apple Teacher</h3>
-                <p>Apple</p>
-            </div>
-            <div class="card">
-                <h3>🔧 PLTW Launch Educator</h3>
-                <p>Project Lead The Way</p>
-            </div>
-            <div class="card">
-                <h3>🌐 ESL Supplemental</h3>
-                <p>Texas Education Agency</p>
-            </div>
-            <div class="card">
-                <h3>📊 Google Project Management</h3>
-                <p>Coursera (In Progress)</p>
-            </div>
-            <div class="card">
-                <h3>📋 CAPM</h3>
-                <p>PMI (Upcoming)</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Tab -->
-    <div class="tab-container" id="contact">
-        <div class="section-header">
-            <h2>Let's Connect</h2>
-            <p>Open to opportunities in corporate training, instructional design, consulting, and L&D roles</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Get In Touch</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">I'm open to full-time positions, contract work, and consulting opportunities. Let's discuss how I can add value to your organization.</p>
-                <div class="contact-links">
-                    <a href="mailto:hello@brennasheppard.com" class="contact-link">
-                        📧 hello@brennasheppard.com
-                    </a>
-                    <a href="mailto:info@brennasheppard.com" class="contact-link">
-                        📧 info@brennasheppard.com
-                    </a>
-                    <a href="mailto:contact@brennasheppard.me" class="contact-link">
-                        📧 contact@brennasheppard.me
-                    </a>
-                    <a href="https://linkedin.com/in/brenna-sheppard" class="contact-link" target="_blank" rel="noopener noreferrer">
-                        💼 linkedin.com/in/brenna-sheppard
-                    </a>
-                </div>
-                <p class="email-note">All email addresses forward to my personal inbox</p>
-            </div>
-            <div class="contact-card">
-                <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Download Resume</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Get a comprehensive overview of my experience, skills, and accomplishments.</p>
-                <a href="BSheppardresume2025.pdf" class="btn btn-primary" download style="display: block; text-align: center;">Download Resume (PDF)</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer>
-    <p>&copy; 2026 Brenna Sheppard. All rights reserved.</p>
-</footer>
-
-<script>
-    // Theme Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const html = document.documentElement;
-
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', currentTheme);
-    updateThemeIcon(currentTheme);
-
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-    });
-
-    function updateThemeIcon(theme) {
-        themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
-    }
-
-    // Tab Navigation
-    const navLinks = document.querySelectorAll('.nav-link');
-    const tabContainers = document.querySelectorAll('.tab-container');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetTab = link.getAttribute('data-tab');
-            
-            // Remove active class from all links
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            
-            // Hide all tabs
-            tabContainers.forEach(tab => tab.classList.remove('active'));
-            
-            // Show target tab
-            document.getElementById(targetTab).classList.add('active');
-            
-            // Close mobile menu
-            closeMenu();
-        });
-    });
-
-    // Mobile Menu
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinksContainer = document.getElementById('navLinks');
-    const header = document.getElementById('header');
-    let menuTimer;
-    let scrollTimer;
-
-    menuToggle.addEventListener('click', () => {
-        const isActive = navLinksContainer.classList.toggle('active');
-        
-        if (isActive) {
-            // Start 7-second timer when menu opens
-            clearTimeout(menuTimer);
-            menuTimer = setTimeout(() => {
-                closeMenu();
-            }, 7000);
-        } else {
-            clearTimeout(menuTimer);
-        }
-    });
-
-    function closeMenu() {
-        navLinksContainer.classList.remove('active');
-        clearTimeout(menuTimer);
-    }
-
-    // Hide menu on scroll
-    let lastScrollTop = 0;
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Close mobile menu when scrolling
-        if (navLinksContainer.classList.contains('active')) {
-            closeMenu();
-        }
-        
-        // Hide header when scrolling down
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            header.classList.add('hidden');
-        } else {
-            header.classList.remove('hidden');
-        }
-        
-        lastScrollTop = scrollTop;
-    }, false);
-</script>
 ```
-
-</body>
-</html>
