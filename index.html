@@ -15,25 +15,25 @@
 
 ```
     :root {
-        --bg-primary: #ebe6df;
-        --bg-secondary: #f7f4f0;
-        --bg-card: #ffffff;
-        --text-primary: #2d2a26;
-        --text-secondary: #5c544a;
-        --accent: #c26d28;
-        --accent-hover: #a05720;
+        --bg-primary: #f5f1eb;
+        --bg-secondary: #ffffff;
+        --bg-card: #fdfcfa;
+        --text-primary: #1f1f1f;
+        --text-secondary: #5a5550;
+        --accent: #d97706;
+        --accent-hover: #b45309;
         --border: #d4cdc3;
-        --shadow: rgba(45, 42, 38, 0.15);
+        --shadow: rgba(0, 0, 0, 0.1);
     }
 
     [data-theme="dark"] {
-        --bg-primary: #1f1c19;
+        --bg-primary: #1a1614;
         --bg-secondary: #2a2420;
-        --bg-card: #352f2a;
+        --bg-card: #332d28;
         --text-primary: #f5f1eb;
         --text-secondary: #c7bdb0;
-        --accent: #e8924f;
-        --accent-hover: #f5a563;
+        --accent: #fb923c;
+        --accent-hover: #f97316;
         --border: #463f38;
         --shadow: rgba(0, 0, 0, 0.4);
     }
@@ -47,8 +47,9 @@
         overflow-x: hidden;
     }
 
+    /* Header & Navigation */
     header {
-        background-color: var(--bg-card);
+        background-color: var(--bg-secondary);
         padding: 1rem 1.5rem;
         position: fixed;
         top: 0;
@@ -136,6 +137,7 @@
         transform: rotate(180deg);
     }
 
+    /* Dashboard Container */
     .dashboard {
         max-width: 1400px;
         margin: 80px auto 0;
@@ -143,6 +145,7 @@
         min-height: calc(100vh - 80px);
     }
 
+    /* Tab Navigation */
     .tab-container {
         display: none;
     }
@@ -152,6 +155,7 @@
         animation: fadeIn 0.5s ease;
     }
 
+    /* Hero Dashboard */
     .hero-dashboard {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -160,7 +164,7 @@
     }
 
     .hero-card {
-        background: var(--bg-card);
+        background: var(--bg-secondary);
         padding: 3rem;
         border-radius: 16px;
         box-shadow: 0 4px 20px var(--shadow);
@@ -229,7 +233,7 @@
     }
 
     .stats-card {
-        background: var(--bg-card);
+        background: var(--bg-secondary);
         padding: 2rem;
         border-radius: 16px;
         box-shadow: 0 4px 20px var(--shadow);
@@ -241,7 +245,7 @@
 
     .stat-item {
         padding: 1.5rem;
-        background: var(--bg-secondary);
+        background: var(--bg-card);
         border-radius: 12px;
         border-left: 4px solid var(--accent);
     }
@@ -257,6 +261,7 @@
         font-size: 0.95rem;
     }
 
+    /* Grid Cards */
     .card-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -265,7 +270,7 @@
     }
 
     .card {
-        background: var(--bg-card);
+        background: var(--bg-secondary);
         padding: 2rem;
         border-radius: 16px;
         box-shadow: 0 4px 20px var(--shadow);
@@ -319,6 +324,7 @@
         font-weight: bold;
     }
 
+    /* Skills Tags */
     .skill-tags {
         display: flex;
         flex-wrap: wrap;
@@ -340,6 +346,7 @@
         transform: scale(1.05);
     }
 
+    /* Contact Section */
     .contact-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -347,7 +354,7 @@
     }
 
     .contact-card {
-        background: var(--bg-card);
+        background: var(--bg-secondary);
         padding: 2rem;
         border-radius: 16px;
         box-shadow: 0 4px 20px var(--shadow);
@@ -364,12 +371,12 @@
         color: var(--text-primary);
         text-decoration: none;
         font-size: 1.05rem;
-        transition: color 0.3s ease, border-color 0.3s ease;
+        transition: color 0.3s ease;
         display: flex;
         align-items: center;
         gap: 0.75rem;
         padding: 0.75rem;
-        background: var(--bg-secondary);
+        background: var(--bg-card);
         border-radius: 8px;
         border: 1px solid var(--border);
     }
@@ -385,10 +392,11 @@
         font-style: italic;
         margin-top: 1rem;
         padding: 1rem;
-        background: var(--bg-secondary);
+        background: var(--bg-card);
         border-radius: 8px;
     }
 
+    /* About Section */
     .about-grid {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -396,7 +404,7 @@
     }
 
     .about-content {
-        background: var(--bg-card);
+        background: var(--bg-secondary);
         padding: 2.5rem;
         border-radius: 16px;
         box-shadow: 0 4px 20px var(--shadow);
@@ -410,7 +418,7 @@
     }
 
     .value-props {
-        background: var(--bg-card);
+        background: var(--bg-secondary);
         padding: 2rem;
         border-radius: 16px;
         box-shadow: 0 4px 20px var(--shadow);
@@ -449,7 +457,7 @@
     }
 
     footer {
-        background: var(--bg-card);
+        background: var(--bg-secondary);
         text-align: center;
         padding: 2rem;
         color: var(--text-secondary);
@@ -457,6 +465,7 @@
         margin-top: 3rem;
     }
 
+    /* Mobile Responsiveness */
     @media (max-width: 968px) {
         .hero-dashboard,
         .about-grid,
@@ -476,7 +485,7 @@
             top: 73px;
             left: 0;
             right: 0;
-            background: var(--bg-card);
+            background: var(--bg-secondary);
             flex-direction: column;
             padding: 1.5rem;
             box-shadow: 0 4px 20px var(--shadow);
@@ -857,4 +866,92 @@
     const html = document.documentElement;
 
     const currentTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+        themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+    }
+
+    // Tab Navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    const tabContainers = document.querySelectorAll('.tab-container');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetTab = link.getAttribute('data-tab');
+            
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Hide all tabs
+            tabContainers.forEach(tab => tab.classList.remove('active'));
+            
+            // Show target tab
+            document.getElementById(targetTab).classList.add('active');
+            
+            // Close mobile menu
+            closeMenu();
+        });
+    });
+
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinksContainer = document.getElementById('navLinks');
+    const header = document.getElementById('header');
+    let menuTimer;
+    let scrollTimer;
+
+    menuToggle.addEventListener('click', () => {
+        const isActive = navLinksContainer.classList.toggle('active');
+        
+        if (isActive) {
+            // Start 7-second timer when menu opens
+            clearTimeout(menuTimer);
+            menuTimer = setTimeout(() => {
+                closeMenu();
+            }, 7000);
+        } else {
+            clearTimeout(menuTimer);
+        }
+    });
+
+    function closeMenu() {
+        navLinksContainer.classList.remove('active');
+        clearTimeout(menuTimer);
+    }
+
+    // Hide menu on scroll
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Close mobile menu when scrolling
+        if (navLinksContainer.classList.contains('active')) {
+            closeMenu();
+        }
+        
+        // Hide header when scrolling down
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            header.classList.add('hidden');
+        } else {
+            header.classList.remove('hidden');
+        }
+        
+        lastScrollTop = scrollTop;
+    }, false);
+</script>
 ```
+
+</body>
+</html>
