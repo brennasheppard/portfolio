@@ -15,24 +15,26 @@
 
 ```
     :root {
-        --bg-primary: #ffffff;
-        --bg-secondary: #f5f7fa;
-        --text-primary: #1a1a1a;
-        --text-secondary: #4a5568;
-        --accent: #2563eb;
-        --accent-hover: #1d4ed8;
-        --border: #e2e8f0;
+        --bg-primary: #f5f1eb;
+        --bg-secondary: #ffffff;
+        --bg-card: #fdfcfa;
+        --text-primary: #1f1f1f;
+        --text-secondary: #5a5550;
+        --accent: #d97706;
+        --accent-hover: #b45309;
+        --border: #d4cdc3;
         --shadow: rgba(0, 0, 0, 0.1);
     }
 
     [data-theme="dark"] {
-        --bg-primary: #0f172a;
-        --bg-secondary: #1e293b;
-        --text-primary: #f1f5f9;
-        --text-secondary: #cbd5e1;
-        --accent: #60a5fa;
-        --accent-hover: #3b82f6;
-        --border: #334155;
+        --bg-primary: #1a1614;
+        --bg-secondary: #2a2420;
+        --bg-card: #332d28;
+        --text-primary: #f5f1eb;
+        --text-secondary: #c7bdb0;
+        --accent: #fb923c;
+        --accent-hover: #f97316;
+        --border: #463f38;
         --shadow: rgba(0, 0, 0, 0.4);
     }
 
@@ -42,22 +44,29 @@
         color: var(--text-primary);
         line-height: 1.6;
         transition: background-color 0.3s ease, color 0.3s ease;
+        overflow-x: hidden;
     }
 
     /* Header & Navigation */
     header {
         background-color: var(--bg-secondary);
         padding: 1rem 1.5rem;
-        position: sticky;
+        position: fixed;
         top: 0;
-        z-index: 100;
+        left: 0;
+        right: 0;
+        z-index: 1000;
         box-shadow: 0 2px 10px var(--shadow);
-        transition: background-color 0.3s ease;
+        transition: transform 0.3s ease, background-color 0.3s ease;
         border-bottom: 1px solid var(--border);
     }
 
+    header.hidden {
+        transform: translateY(-100%);
+    }
+
     nav {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
@@ -74,10 +83,9 @@
 
     .nav-links {
         display: flex;
-        gap: 1.5rem;
+        gap: 2rem;
         list-style: none;
         align-items: center;
-        flex-wrap: wrap;
     }
 
     .nav-links a {
@@ -86,13 +94,18 @@
         font-weight: 500;
         transition: color 0.3s ease;
         font-size: 0.95rem;
+        cursor: pointer;
     }
 
     .nav-links a:hover {
         color: var(--accent);
     }
 
-    /* Mobile Menu Toggle */
+    .nav-links a.active {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
     .menu-toggle {
         display: none;
         background: none;
@@ -103,7 +116,6 @@
         padding: 0.5rem;
     }
 
-    /* Theme Toggle Button */
     .theme-toggle {
         background: var(--accent);
         border: none;
@@ -125,40 +137,64 @@
         transform: rotate(180deg);
     }
 
-    /* Hero Section */
-    .hero {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 4rem 1.5rem;
-        text-align: center;
+    /* Dashboard Container */
+    .dashboard {
+        max-width: 1400px;
+        margin: 80px auto 0;
+        padding: 2rem 1.5rem;
+        min-height: calc(100vh - 80px);
     }
 
-    .hero h1 {
-        font-size: clamp(2rem, 5vw, 3rem);
-        margin-bottom: 1rem;
+    /* Tab Navigation */
+    .tab-container {
+        display: none;
+    }
+
+    .tab-container.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+    }
+
+    /* Hero Dashboard */
+    .hero-dashboard {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero-card {
+        background: var(--bg-secondary);
+        padding: 3rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px var(--shadow);
+        border: 1px solid var(--border);
+    }
+
+    .hero-card h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
         color: var(--text-primary);
         font-weight: 700;
     }
 
-    .hero h2 {
-        font-size: clamp(1.2rem, 3vw, 1.5rem);
+    .hero-card h2 {
+        font-size: 1.3rem;
         color: var(--accent);
         font-weight: 500;
         margin-bottom: 1.5rem;
     }
 
-    .hero p {
-        font-size: clamp(1rem, 2vw, 1.1rem);
+    .hero-card p {
         color: var(--text-secondary);
-        max-width: 800px;
-        margin: 0 auto 2rem;
+        font-size: 1.05rem;
         line-height: 1.7;
+        margin-bottom: 2rem;
     }
 
     .cta-buttons {
         display: flex;
         gap: 1rem;
-        justify-content: center;
         flex-wrap: wrap;
     }
 
@@ -196,48 +232,203 @@
         color: white;
     }
 
-    /* Section Styles */
-    section {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 4rem 1.5rem;
+    .stats-card {
+        background: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px var(--shadow);
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
-    section h2 {
-        font-size: clamp(2rem, 4vw, 2.5rem);
-        margin-bottom: 2.5rem;
-        text-align: center;
+    .stat-item {
+        padding: 1.5rem;
+        background: var(--bg-card);
+        border-radius: 12px;
+        border-left: 4px solid var(--accent);
+    }
+
+    .stat-item h3 {
+        font-size: 2rem;
+        color: var(--accent);
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-item p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+    }
+
+    /* Grid Cards */
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .card {
+        background: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px var(--shadow);
+        border: 1px solid var(--border);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px var(--shadow);
+    }
+
+    .card h3 {
         color: var(--text-primary);
-        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .card-icon {
+        font-size: 1.5rem;
+    }
+
+    .card p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
+    }
+
+    .card ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .card li {
+        color: var(--text-secondary);
+        padding: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.6;
+    }
+
+    .card li:before {
+        content: "→";
+        color: var(--accent);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+
+    /* Skills Tags */
+    .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .skill-tag {
+        background: var(--accent);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: transform 0.2s ease;
+    }
+
+    .skill-tag:hover {
+        transform: scale(1.05);
+    }
+
+    /* Contact Section */
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .contact-card {
+        background: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px var(--shadow);
+        border: 1px solid var(--border);
+    }
+
+    .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .contact-link {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1.05rem;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: var(--bg-card);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+    }
+
+    .contact-link:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+    }
+
+    .email-note {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        font-style: italic;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: var(--bg-card);
+        border-radius: 8px;
+    }
+
+    /* About Section */
+    .about-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
     }
 
     .about-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: start;
+        background: var(--bg-secondary);
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px var(--shadow);
+        border: 1px solid var(--border);
     }
 
-    .about-text p {
+    .about-content p {
         color: var(--text-secondary);
         margin-bottom: 1.25rem;
-        font-size: 1.05rem;
         line-height: 1.7;
     }
 
     .value-props {
         background: var(--bg-secondary);
         padding: 2rem;
-        border-radius: 12px;
-        border-left: 4px solid var(--accent);
-        box-shadow: 0 2px 8px var(--shadow);
+        border-radius: 16px;
+        box-shadow: 0 4px 20px var(--shadow);
+        border: 1px solid var(--border);
     }
 
     .value-props h3 {
         color: var(--text-primary);
         margin-bottom: 1.5rem;
         font-size: 1.3rem;
-        font-weight: 600;
     }
 
     .value-list {
@@ -245,13 +436,12 @@
     }
 
     .value-list li {
-        padding: 0.875rem 0;
+        padding: 0.75rem 0;
         color: var(--text-secondary);
         display: flex;
         align-items: center;
         gap: 0.75rem;
         border-bottom: 1px solid var(--border);
-        font-size: 1rem;
     }
 
     .value-list li:last-child {
@@ -262,182 +452,8 @@
         content: "✓";
         color: var(--accent);
         font-weight: bold;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         flex-shrink: 0;
-    }
-
-    .expertise-intro {
-        text-align: center;
-        max-width: 800px;
-        margin: 0 auto 3rem;
-        color: var(--text-secondary);
-        font-size: 1.05rem;
-        line-height: 1.7;
-    }
-
-    .expertise-grid {
-        display: grid;
-        gap: 2rem;
-    }
-
-    .expertise-card {
-        background: var(--bg-secondary);
-        padding: 2.5rem;
-        border-radius: 12px;
-        border-left: 4px solid var(--accent);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 2px 8px var(--shadow);
-    }
-
-    .expertise-card:hover {
-        transform: translateX(5px);
-        box-shadow: 0 4px 16px var(--shadow);
-    }
-
-    .expertise-card h3 {
-        color: var(--text-primary);
-        margin-bottom: 1rem;
-        font-size: 1.5rem;
-        font-weight: 600;
-    }
-
-    .expertise-card p {
-        color: var(--text-secondary);
-        margin-bottom: 1.25rem;
-        line-height: 1.7;
-        font-size: 1.05rem;
-    }
-
-    .expertise-highlights {
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--border);
-    }
-
-    .expertise-highlights h4 {
-        color: var(--text-primary);
-        margin-bottom: 1rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-    }
-
-    .highlight-list {
-        list-style: none;
-        display: grid;
-        gap: 0.75rem;
-    }
-
-    .highlight-list li {
-        color: var(--text-secondary);
-        padding-left: 1.75rem;
-        position: relative;
-        line-height: 1.6;
-        font-size: 1rem;
-    }
-
-    .highlight-list li:before {
-        content: "→";
-        color: var(--accent);
-        position: absolute;
-        left: 0;
-        font-weight: bold;
-        font-size: 1.1rem;
-    }
-
-    .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
-    }
-
-    .skill-category {
-        background: var(--bg-secondary);
-        padding: 2rem;
-        border-radius: 12px;
-        text-align: center;
-        transition: transform 0.3s ease;
-        box-shadow: 0 2px 8px var(--shadow);
-    }
-
-    .skill-category:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 16px var(--shadow);
-    }
-
-    .skill-category h3 {
-        color: var(--text-primary);
-        margin-bottom: 1.5rem;
-        font-size: 1.3rem;
-        font-weight: 600;
-    }
-
-    .skill-category p {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-    }
-
-    .skill-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        justify-content: center;
-    }
-
-    .skill-tag {
-        background: var(--accent);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        transition: transform 0.2s ease;
-        font-weight: 500;
-    }
-
-    .skill-tag:hover {
-        transform: scale(1.05);
-    }
-
-    .contact-content {
-        text-align: center;
-        max-width: 700px;
-        margin: 0 auto;
-    }
-
-    .contact-content p {
-        color: var(--text-secondary);
-        font-size: 1.05rem;
-        margin-bottom: 2rem;
-        line-height: 1.7;
-    }
-
-    .contact-links {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
-
-    .contact-link {
-        color: var(--text-primary);
-        text-decoration: none;
-        font-size: 1.1rem;
-        transition: color 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        padding: 0.5rem;
-    }
-
-    .contact-link:hover {
-        color: var(--accent);
-    }
-
-    .email-note {
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        font-style: italic;
-        margin-top: 1rem;
     }
 
     footer {
@@ -445,23 +461,36 @@
         text-align: center;
         padding: 2rem;
         color: var(--text-secondary);
-        margin-top: 4rem;
         border-top: 1px solid var(--border);
+        margin-top: 3rem;
     }
 
     /* Mobile Responsiveness */
+    @media (max-width: 968px) {
+        .hero-dashboard,
+        .about-grid,
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .card-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
     @media (max-width: 768px) {
         .nav-links {
             display: none;
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: 73px;
             left: 0;
             right: 0;
             background: var(--bg-secondary);
             flex-direction: column;
-            padding: 1rem;
-            box-shadow: 0 4px 6px var(--shadow);
-            border-top: 1px solid var(--border);
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px var(--shadow);
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
         }
 
         .nav-links.active {
@@ -472,40 +501,23 @@
             display: block;
         }
 
-        nav {
-            position: relative;
+        .hero-card {
+            padding: 2rem;
         }
 
-        .about-content {
-            grid-template-columns: 1fr;
-            gap: 2rem;
+        .hero-card h1 {
+            font-size: 2rem;
         }
 
-        .skills-grid {
-            grid-template-columns: 1fr;
+        .dashboard {
+            padding: 1.5rem 1rem;
         }
-
-        section {
-            padding: 3rem 1.5rem;
-        }
-
-        .hero {
-            padding: 3rem 1.5rem;
-        }
-
-        .expertise-card {
-            padding: 1.5rem;
-        }
-    }
-
-    html {
-        scroll-behavior: smooth;
     }
 
     @keyframes fadeIn {
         from {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(10px);
         }
         to {
             opacity: 1;
@@ -513,25 +525,36 @@
         }
     }
 
-    .fade-in {
-        animation: fadeIn 0.8s ease-out;
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+        color: var(--text-secondary);
+        font-size: 1.05rem;
     }
 </style>
 ```
 
 </head>
 <body>
-    <header>
+    <header id="header">
         <nav>
             <div class="logo">BS</div>
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#expertise">Expertise</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a class="nav-link active" data-tab="home">Home</a></li>
+                <li><a class="nav-link" data-tab="about">About</a></li>
+                <li><a class="nav-link" data-tab="expertise">Expertise</a></li>
+                <li><a class="nav-link" data-tab="skills">Skills</a></li>
+                <li><a class="nav-link" data-tab="certifications">Certifications</a></li>
+                <li><a class="nav-link" data-tab="contact">Contact</a></li>
                 <li>
                     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                         <span id="themeIcon">🌙</span>
@@ -542,118 +565,149 @@
     </header>
 
 ```
-<main>
-    <section id="home" class="hero fade-in">
-        <h1>Brenna Sheppard</h1>
-        <h2>Learning & Development Specialist</h2>
-        <p>Transforming organizational performance through innovative training solutions, instructional design, and technology-enhanced learning experiences. Proven expertise in corporate training, curriculum development, and learning program implementation across diverse industries.</p>
-        <div class="cta-buttons">
-            <a href="#contact" class="btn btn-primary">Let's Connect</a>
-            <a href="BSheppardresume2025.pdf" class="btn btn-secondary" download>Download Resume</a>
+<div class="dashboard">
+    <!-- Home Tab -->
+    <div class="tab-container active" id="home">
+        <div class="hero-dashboard">
+            <div class="hero-card">
+                <h1>Brenna Sheppard</h1>
+                <h2>Learning & Development Specialist</h2>
+                <p>Transforming organizational performance through innovative training solutions, instructional design, and technology-enhanced learning experiences. Proven expertise in corporate training, curriculum development, and learning program implementation across diverse industries.</p>
+                <div class="cta-buttons">
+                    <a class="btn btn-primary nav-link" data-tab="contact">Let's Connect</a>
+                    <a href="BSheppardresume2025.pdf" class="btn btn-secondary" download>Download Resume</a>
+                </div>
+            </div>
+            <div class="stats-card">
+                <div class="stat-item">
+                    <h3>10+</h3>
+                    <p>Years of L&D Experience</p>
+                </div>
+                <div class="stat-item">
+                    <h3>8</h3>
+                    <p>Professional Certifications</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Professionals Trained</p>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <section id="about">
-        <h2>About</h2>
-        <div class="about-content">
-            <div class="about-text">
+        <div class="card-grid">
+            <div class="card">
+                <h3><span class="card-icon">🎯</span> Training & Facilitation</h3>
+                <p>Expert facilitator delivering engaging learning experiences for adult audiences in virtual and in-person settings.</p>
+            </div>
+            <div class="card">
+                <h3><span class="card-icon">📐</span> Instructional Design</h3>
+                <p>Systematic approach using ADDIE, SAM, and other ID models to create effective learning solutions.</p>
+            </div>
+            <div class="card">
+                <h3><span class="card-icon">💻</span> Educational Technology</h3>
+                <p>Technology integration expertise with LMS platforms, authoring tools, and virtual training systems.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Tab -->
+    <div class="tab-container" id="about">
+        <div class="section-header">
+            <h2>About Me</h2>
+            <p>Results-driven L&D professional with extensive experience across multiple industries</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-content">
                 <p>I am a results-driven Learning & Development professional with 10+ years of experience designing and delivering impactful training solutions that drive measurable business outcomes. My background spans instructional design, corporate training, curriculum development, and educational technology implementation.</p>
                 <p>Currently serving as a Digital Learning Specialist, I partner with organizations to implement technology-enhanced learning solutions, conduct customized professional development, and create scalable training programs. I excel at translating complex concepts into engaging learning experiences for adult learners across multiple delivery modalities.</p>
                 <p>My expertise includes needs assessment, program design, LMS implementation, facilitation, and measurement of learning impact. I bring a unique blend of instructional expertise, project management skills, and technical proficiency to every engagement.</p>
                 <p>Whether working as a trainer, consultant, instructional designer, or project lead, I am committed to creating learning solutions that align with organizational goals and deliver lasting performance improvement.</p>
             </div>
             <div class="value-props">
-                <h3>What I Bring to Your Organization</h3>
+                <h3>What I Bring</h3>
                 <ul class="value-list">
-                    <li>Proven track record in adult learning & development</li>
-                    <li>Strong instructional design & curriculum expertise</li>
-                    <li>Experience across multiple industries & formats</li>
-                    <li>Technology integration & LMS proficiency</li>
-                    <li>Data-driven approach to learning impact</li>
-                    <li>Exceptional facilitation & presentation skills</li>
-                    <li>Project management & stakeholder collaboration</li>
-                    <li>Adaptable consultant mindset</li>
+                    <li>Adult learning expertise</li>
+                    <li>Instructional design</li>
+                    <li>Multi-industry experience</li>
+                    <li>Technology integration</li>
+                    <li>Data-driven approach</li>
+                    <li>Facilitation skills</li>
+                    <li>Project management</li>
+                    <li>Consultant mindset</li>
                 </ul>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="expertise">
-        <h2>Core Expertise</h2>
-        <p class="expertise-intro">
-            My diverse background enables me to serve as a versatile learning professional—whether you need a corporate trainer, instructional designer, learning consultant, curriculum developer, or project manager for your training initiatives.
-        </p>
-        <div class="expertise-grid">
-            <div class="expertise-card">
+    <!-- Expertise Tab -->
+    <div class="tab-container" id="expertise">
+        <div class="section-header">
+            <h2>Core Expertise</h2>
+            <p>Versatile learning professional ready for training, design, consulting, or project management roles</p>
+        </div>
+        <div class="card-grid">
+            <div class="card">
                 <h3>Training & Facilitation</h3>
-                <p>Expert facilitator skilled in delivering engaging, interactive learning experiences for adult audiences. Proficient in both virtual and in-person delivery, with proven ability to adapt content and approach based on audience needs and learning objectives.</p>
-                <div class="expertise-highlights">
-                    <h4>Key Capabilities:</h4>
-                    <ul class="highlight-list">
-                        <li>Corporate training program design and delivery</li>
-                        <li>Customized onsite and virtual training sessions</li>
-                        <li>Technology implementation training and support</li>
-                        <li>Professional development workshops and presentations</li>
-                        <li>Conference presentations and thought leadership</li>
-                        <li>Train-the-trainer program development</li>
-                    </ul>
-                </div>
+                <p>Expert facilitator skilled in delivering engaging, interactive learning experiences for adult audiences. Proficient in both virtual and in-person delivery.</p>
+                <ul>
+                    <li>Corporate training program design</li>
+                    <li>Customized onsite training</li>
+                    <li>Technology implementation support</li>
+                    <li>Professional development workshops</li>
+                    <li>Conference presentations</li>
+                    <li>Train-the-trainer programs</li>
+                </ul>
             </div>
 
-            <div class="expertise-card">
-                <h3>Instructional Design & Curriculum Development</h3>
-                <p>Systematic approach to designing learning solutions using ADDIE, SAM, and other ID models. Skilled at conducting needs assessments, defining learning objectives, creating engaging content, and measuring learning effectiveness.</p>
-                <div class="expertise-highlights">
-                    <h4>Core Competencies:</h4>
-                    <ul class="highlight-list">
-                        <li>Learning needs analysis and gap assessment</li>
-                        <li>Course design and curriculum architecture</li>
-                        <li>Multimedia learning content development</li>
-                        <li>Assessment design and evaluation strategies</li>
-                        <li>Instructional materials and job aids creation</li>
-                        <li>Learning program documentation and SOPs</li>
-                    </ul>
-                </div>
+            <div class="card">
+                <h3>Instructional Design</h3>
+                <p>Systematic approach to designing learning solutions using ADDIE, SAM, and other ID models. Skilled at needs assessment and evaluation.</p>
+                <ul>
+                    <li>Learning needs analysis</li>
+                    <li>Course design & curriculum</li>
+                    <li>Multimedia content development</li>
+                    <li>Assessment design</li>
+                    <li>Job aids creation</li>
+                    <li>Program documentation</li>
+                </ul>
             </div>
 
-            <div class="expertise-card">
-                <h3>Educational Technology & Digital Learning</h3>
-                <p>Technology-savvy professional experienced in implementing and optimizing learning technologies. Proficient with LMS platforms, authoring tools, collaboration software, and emerging learning technologies.</p>
-                <div class="expertise-highlights">
-                    <h4>Technical Skills:</h4>
-                    <ul class="highlight-list">
-                        <li>LMS implementation and administration</li>
-                        <li>Educational technology tool evaluation and integration</li>
-                        <li>Digital learning content creation and curation</li>
-                        <li>Virtual training platform expertise (Zoom, Teams, Webex)</li>
-                        <li>Google Workspace and Microsoft 365 for learning</li>
-                        <li>Interactive display technology training</li>
-                    </ul>
-                </div>
+            <div class="card">
+                <h3>Educational Technology</h3>
+                <p>Technology-savvy professional experienced in implementing and optimizing learning technologies and digital solutions.</p>
+                <ul>
+                    <li>LMS implementation</li>
+                    <li>EdTech tool evaluation</li>
+                    <li>Digital content creation</li>
+                    <li>Virtual training platforms</li>
+                    <li>Google Workspace & Microsoft 365</li>
+                    <li>Interactive display technology</li>
+                </ul>
             </div>
 
-            <div class="expertise-card">
-                <h3>Learning Program Management & Consulting</h3>
-                <p>Strategic partner who can lead learning initiatives from conception through evaluation. Experienced in stakeholder management, project planning, vendor coordination, and change management for learning programs.</p>
-                <div class="expertise-highlights">
-                    <h4>Project Leadership:</h4>
-                    <ul class="highlight-list">
-                        <li>Learning program strategy and roadmap development</li>
-                        <li>Cross-functional stakeholder collaboration</li>
-                        <li>Training needs assessment and solution design</li>
-                        <li>Budget management and resource allocation</li>
-                        <li>Performance metrics and ROI measurement</li>
-                        <li>Continuous improvement and iteration</li>
-                    </ul>
-                </div>
+            <div class="card">
+                <h3>Program Management</h3>
+                <p>Strategic partner who can lead learning initiatives from conception through evaluation with strong stakeholder management.</p>
+                <ul>
+                    <li>Learning strategy development</li>
+                    <li>Stakeholder collaboration</li>
+                    <li>Needs assessment</li>
+                    <li>Budget & resource management</li>
+                    <li>Performance metrics & ROI</li>
+                    <li>Continuous improvement</li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="skills">
-        <h2>Skills & Competencies</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
+    <!-- Skills Tab -->
+    <div class="tab-container" id="skills">
+        <div class="section-header">
+            <h2>Skills & Competencies</h2>
+            <p>Comprehensive skillset across learning technologies, design, delivery, and management</p>
+        </div>
+        <div class="card-grid">
+            <div class="card">
                 <h3>Learning Technologies</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">Google Workspace</span>
@@ -665,7 +719,7 @@
                 </div>
             </div>
 
-            <div class="skill-category">
+            <div class="card">
                 <h3>Instructional Design</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">ADDIE Model</span>
@@ -677,7 +731,7 @@
                 </div>
             </div>
 
-            <div class="skill-category">
+            <div class="card">
                 <h3>Training Delivery</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">Facilitation</span>
@@ -689,7 +743,7 @@
                 </div>
             </div>
 
-            <div class="skill-category">
+            <div class="card">
                 <h3>Program Management</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">Project Planning</span>
@@ -700,7 +754,7 @@
                 </div>
             </div>
 
-            <div class="skill-category">
+            <div class="card">
                 <h3>Subject Matter Expertise</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">STEM Education</span>
@@ -711,7 +765,7 @@
                 </div>
             </div>
 
-            <div class="skill-category">
+            <div class="card">
                 <h3>Soft Skills</h3>
                 <div class="skill-tags">
                     <span class="skill-tag">Communication</span>
@@ -722,134 +776,91 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="certifications">
-        <h2>Certifications & Credentials</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3>Google Educator Level 1</h3>
+    <!-- Certifications Tab -->
+    <div class="tab-container" id="certifications">
+        <div class="section-header">
+            <h2>Certifications & Credentials</h2>
+            <p>Continuously expanding expertise through professional development and certification</p>
+        </div>
+        <div class="card-grid">
+            <div class="card">
+                <h3>🎓 Google Educator Level 1</h3>
                 <p>Google</p>
             </div>
-            <div class="skill-category">
-                <h3>Google Educator Level 2</h3>
+            <div class="card">
+                <h3>🎓 Google Educator Level 2</h3>
                 <p>Google</p>
             </div>
-            <div class="skill-category">
-                <h3>AWS Cloud Practitioner</h3>
+            <div class="card">
+                <h3>☁️ AWS Cloud Practitioner</h3>
                 <p>Amazon Web Services</p>
             </div>
-            <div class="skill-category">
-                <h3>Apple Teacher</h3>
+            <div class="card">
+                <h3>🍎 Apple Teacher</h3>
                 <p>Apple</p>
             </div>
-            <div class="skill-category">
-                <h3>PLTW Launch Educator</h3>
+            <div class="card">
+                <h3>🔧 PLTW Launch Educator</h3>
                 <p>Project Lead The Way</p>
             </div>
-            <div class="skill-category">
-                <h3>ESL Supplemental</h3>
+            <div class="card">
+                <h3>🌐 ESL Supplemental</h3>
                 <p>Texas Education Agency</p>
             </div>
-            <div class="skill-category">
-                <h3>Google Project Management</h3>
+            <div class="card">
+                <h3>📊 Google Project Management</h3>
                 <p>Coursera (In Progress)</p>
             </div>
-            <div class="skill-category">
-                <h3>CAPM</h3>
+            <div class="card">
+                <h3>📋 CAPM</h3>
                 <p>PMI (Upcoming)</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="contact">
-        <h2>Let's Connect</h2>
-        <div class="contact-content">
-            <p>I'm open to opportunities in corporate training, instructional design, learning consultation, project management, and other L&D roles. Whether you're looking for a full-time hire, contractor, or consultant, I'd love to discuss how I can add value to your organization.</p>
-            <div class="contact-links">
-                <a href="mailto:hello@brennasheppard.com" class="contact-link">
-                    📧 hello@brennasheppard.com
-                </a>
-                <a href="mailto:info@brennasheppard.com" class="contact-link">
-                    📧 info@brennasheppard.com
-                </a>
-                <a href="mailto:contact@brennasheppard.me" class="contact-link">
-                    📧 contact@brennasheppard.me
-                </a>
-                <a href="https://linkedin.com/in/brenna-sheppard" class="contact-link" target="_blank" rel="noopener noreferrer">
-                    💼 linkedin.com/in/brenna-sheppard
-                </a>
+    <!-- Contact Tab -->
+    <div class="tab-container" id="contact">
+        <div class="section-header">
+            <h2>Let's Connect</h2>
+            <p>Open to opportunities in corporate training, instructional design, consulting, and L&D roles</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Get In Touch</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">I'm open to full-time positions, contract work, and consulting opportunities. Let's discuss how I can add value to your organization.</p>
+                <div class="contact-links">
+                    <a href="mailto:hello@brennasheppard.com" class="contact-link">
+                        📧 hello@brennasheppard.com
+                    </a>
+                    <a href="mailto:info@brennasheppard.com" class="contact-link">
+                        📧 info@brennasheppard.com
+                    </a>
+                    <a href="mailto:contact@brennasheppard.me" class="contact-link">
+                        📧 contact@brennasheppard.me
+                    </a>
+                    <a href="https://linkedin.com/in/brenna-sheppard" class="contact-link" target="_blank" rel="noopener noreferrer">
+                        💼 linkedin.com/in/brenna-sheppard
+                    </a>
+                </div>
+                <p class="email-note">All email addresses forward to my personal inbox</p>
             </div>
-            <p class="email-note">All email addresses forward to my personal inbox</p>
-            <div style="margin-top: 2rem;">
-                <a href="BSheppardresume2025.pdf" class="btn btn-primary" download>Download Resume</a>
+            <div class="contact-card">
+                <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Download Resume</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Get a comprehensive overview of my experience, skills, and accomplishments.</p>
+                <a href="BSheppardresume2025.pdf" class="btn btn-primary" download style="display: block; text-align: center;">Download Resume (PDF)</a>
             </div>
         </div>
-    </section>
-</main>
+    </div>
+</div>
 
 <footer>
     <p>&copy; 2026 Brenna Sheppard. All rights reserved.</p>
 </footer>
 
 <script>
-    // Theme Toggle Functionality
+    // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const html = document.documentElement;
-
-    // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', currentTheme);
-    updateThemeIcon(currentTheme);
-
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-    });
-
-    function updateThemeIcon(theme) {
-        themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
-    }
-
-    // Mobile Menu Toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-    // Close mobile menu when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-        });
-    });
-
-    // Add fade-in animation on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
-    });
-</script>
+    const themeIcon = document.getElementByI
 ```
-
-</body>
-</html>
