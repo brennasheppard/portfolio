@@ -1,1636 +1,1592 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Brenna Sheppard - Learning & Development Professional specializing in instructional design, corporate training, and educational technology implementation.">
-    <title>Brenna Sheppard | Learning & Development Specialist</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #1a1418;
-            --bg-secondary: #261d22;
-            --bg-card: #322830;
-            --text-primary: #f5ebe0;
-            --text-secondary: #d4c5c8;
-            --accent: #b76e79;
-            --accent-light: #d4a5a5;
-            --accent-hover: #9a5a64;
-            --border: #4a3f44;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --sparkle: #f0d9e0;
-        }
-
-        [data-theme="light"] {
-            --bg-primary: #fff5f7;
-            --bg-secondary: #ffeef1;
-            --bg-card: #fff9fa;
-            --text-primary: #2d2428;
-            --text-secondary: #5a4a4e;
-            --accent: #b76e79;
-            --accent-light: #d4a5a5;
-            --accent-hover: #9a5a64;
-            --border: #e8d0d4;
-            --shadow: rgba(183, 110, 121, 0.15);
-            --sparkle: #b76e79;
-        }
-
-        body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: background-color 0.4s ease, color 0.4s ease;
-            overflow-x: hidden;
-        }
-
-        /* Floating Particles Background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-light);
-            border-radius: 50%;
-            opacity: 0.4;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .particle:nth-child(odd) {
-            width: 4px;
-            height: 4px;
-            animation-duration: 20s;
-        }
-
-        .particle::before {
-            content: '✦';
-            position: absolute;
-            font-size: 12px;
-            color: var(--sparkle);
-            opacity: 0.6;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* Sparkle decorations */
-        .sparkle-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .sparkle {
-            position: absolute;
-            font-size: 1.2rem;
-            color: var(--sparkle);
-            opacity: 0;
-            animation: sparkle 3s infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
-            50% { opacity: 0.8; transform: scale(1) rotate(180deg); }
-        }
-
-        /* Header & Navigation */
-        header {
-            background: var(--bg-secondary);
-            padding: 1rem 1.5rem;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px var(--shadow);
-            transition: all 0.4s ease;
-            border-bottom: 2px solid var(--accent);
-            backdrop-filter: blur(10px);
-        }
-
-        header.hidden {
-            transform: translateY(-100%);
-        }
-
-        nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--accent);
-            flex-shrink: 0;
-            letter-spacing: 2px;
-            position: relative;
-        }
-
-        .logo::after {
-            content: '✦';
-            font-size: 0.8rem;
-            position: absolute;
-            top: -2px;
-            right: -12px;
-            animation: twinkle 2s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 0.5rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            font-size: 0.95rem;
-            cursor: pointer;
-            padding: 0.6rem 1rem;
-            border-radius: 25px;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-            background: var(--bg-card);
-            transform: translateY(-2px) scale(1.05);
-        }
-
-        .nav-links a.active {
-            color: white;
-            background: var(--accent);
-            font-weight: 600;
-        }
-
-        .nav-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .theme-toggle {
-            background: var(--bg-card);
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .theme-toggle:hover {
-            background: var(--accent);
-            color: white;
-            transform: scale(1.15) rotate(180deg);
-            box-shadow: 0 4px 20px var(--shadow);
-        }
-
-        .menu-toggle {
-            display: none;
-            background: var(--bg-card);
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            font-size: 1.3rem;
-            cursor: pointer;
-            padding: 0.5rem 0.75rem;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .menu-toggle:hover {
-            background: var(--accent);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        /* Dashboard Container */
-        .dashboard {
-            max-width: 1400px;
-            margin: 90px auto 0;
-            padding: 2rem 1.5rem;
-            min-height: calc(100vh - 90px);
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Tab Navigation */
-        .tab-container {
-            display: none;
-        }
-
-        .tab-container.active {
-            display: block;
-            animation: fadeInUp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Hero Dashboard */
-        .hero-dashboard {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .hero-card {
-            background: var(--bg-secondary);
-            padding: 3rem;
-            border-radius: 24px;
-            box-shadow: 0 8px 32px var(--shadow);
-            border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-card::before {
-            content: '✦';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            color: var(--accent-light);
-            opacity: 0.3;
-            animation: twinkle 3s infinite;
-        }
-
-        .hero-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 16px 48px var(--shadow);
-        }
-
-        .hero-card h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .typing-container {
-            height: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-card h2 {
-            font-size: 1.4rem;
-            color: var(--accent);
-            font-weight: 500;
-            display: inline;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.4rem;
-            background: var(--accent);
-            margin-left: 2px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .hero-card p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.9rem 2rem;
-            border: none;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: white;
-            box-shadow: 0 4px 15px rgba(183, 110, 121, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(183, 110, 121, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-4px) scale(1.05);
-        }
-
-        .stats-card {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 24px;
-            box-shadow: 0 8px 32px var(--shadow);
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .stat-item {
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border-left: 4px solid var(--accent);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-item::after {
-            content: '✦';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5rem;
-            color: var(--accent-light);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateX(8px) scale(1.02);
-            border-left-width: 6px;
-        }
-
-        .stat-item:hover::after {
-            opacity: 0.5;
-        }
-
-        .stat-item h3 {
-            font-size: 2.2rem;
-            color: var(--accent);
-            margin-bottom: 0.25rem;
-            font-weight: 700;
-        }
-
-        .stat-item p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .quick-action {
-            background: var(--bg-secondary);
-            padding: 1.75rem;
-            border-radius: 20px;
-            box-shadow: 0 6px 24px var(--shadow);
-            border: 1px solid var(--border);
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .quick-action::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .quick-action:hover {
-            transform: translateY(-10px) scale(1.03);
-            border-color: var(--accent);
-        }
-
-        .quick-action:hover::before {
-            transform: scaleX(1);
-        }
-
-        .quick-action-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-            display: block;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .quick-action:hover .quick-action-icon {
-            animation: bounceMore 0.5s;
-        }
-
-        @keyframes bounceMore {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.2); }
-        }
-
-        .quick-action h4 {
-            color: var(--text-primary);
-            font-size: 1.05rem;
-            margin-bottom: 0.25rem;
-            font-weight: 600;
-        }
-
-        .quick-action p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        /* Grid Cards */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 6px 24px var(--shadow);
-            border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
-            background-size: 200% 100%;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 16px 40px var(--shadow);
-        }
-
-        .card:hover::before {
-            transform: scaleX(1);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        .card h3 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .card-icon {
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover .card-icon {
-            transform: scale(1.2) rotate(10deg);
-        }
-
-        .card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.25rem;
-        }
-
-        .card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .card li {
-            color: var(--text-secondary);
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
-
-        .card li:before {
-            content: "✦";
-            color: var(--accent);
-            position: absolute;
-            left: 0;
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover li:before {
-            transform: rotate(72deg);
-        }
-
-        /* Skills Tags */
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-top: 1rem;
-        }
-
-        .skill-tag {
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: white;
-            padding: 0.5rem 1.1rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            cursor: default;
-        }
-
-        .skill-tag:hover {
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 4px 12px rgba(183, 110, 121, 0.4);
-        }
-
-        /* Section Headers */
-        .section-header {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .section-header h2 {
-            font-size: 2.2rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .section-header h2::after {
-            content: '✦';
-            font-size: 1rem;
-            color: var(--accent);
-            animation: twinkle 2s infinite;
-        }
-
-        .section-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-        }
-
-        .about-content {
-            background: var(--bg-secondary);
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 8px 32px var(--shadow);
-            border: 1px solid var(--border);
-        }
-
-        .about-content p {
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            line-height: 1.8;
-        }
-
-        .value-props {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 24px;
-            box-shadow: 0 8px 32px var(--shadow);
-            border: 1px solid var(--border);
-        }
-
-        .value-props h3 {
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .value-props h3::before {
-            content: '✦';
-            color: var(--accent);
-        }
-
-        .value-list {
-            list-style: none;
-        }
-
-        .value-list li {
-            padding: 0.85rem 0;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            border-bottom: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .value-list li:last-child {
-            border-bottom: none;
-        }
-
-        .value-list li:hover {
-            padding-left: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .value-list li:before {
-            content: "♡";
-            color: var(--accent);
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .value-list li:hover:before {
-            transform: scale(1.3);
-        }
-
-        /* Certification Cards with Actual Logos */
-        .cert-card {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 6px 24px var(--shadow);
-            border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .cert-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 16px 40px var(--shadow);
-        }
-
-        .cert-logo {
-            width: 72px;
-            height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .cert-card:hover .cert-logo {
-            transform: scale(1.15) rotate(5deg);
-        }
-
-        .cert-logo svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .cert-card h3 {
-            color: var(--text-primary);
-            font-size: 1.15rem;
-            margin: 0;
-            font-weight: 600;
-        }
-
-        .cert-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin: 0;
-        }
-
-        .cert-badge {
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        /* Contact Section */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .contact-card {
-            background: var(--bg-secondary);
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 8px 32px var(--shadow);
-            border: 1px solid var(--border);
-        }
-
-        .contact-card h3 {
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .contact-card h3::before {
-            content: '✦';
-            color: var(--accent);
-        }
-
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .contact-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem;
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .contact-link:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-            transform: translateX(8px) scale(1.02);
-            box-shadow: 0 4px 16px var(--shadow);
-        }
-
-        .contact-link span {
-            font-size: 1.3rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--bg-secondary);
-            text-align: center;
-            padding: 2.5rem;
-            color: var(--text-secondary);
-            border-top: 2px solid var(--accent);
-            margin-top: 3rem;
-            position: relative;
-        }
-
-        footer::before {
-            content: '✦ ✦ ✦';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg-secondary);
-            padding: 0 1rem;
-            color: var(--accent);
-            letter-spacing: 0.5rem;
-        }
-
-        /* Mobile Menu Styles */
-        @media (max-width: 968px) {
-            .hero-dashboard,
-            .about-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .quick-actions {
-                grid-template-columns: 1fr;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 73px;
-                left: 0;
-                right: 0;
-                background: var(--bg-secondary);
-                flex-direction: column;
-                padding: 1.5rem;
-                box-shadow: 0 8px 32px var(--shadow);
-                border-bottom: 2px solid var(--accent);
-                gap: 0.5rem;
-                max-height: calc(100vh - 73px);
-                overflow-y: auto;
-            }
-
-            .nav-links.active {
-                display: flex;
-                animation: slideDown 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            }
-
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .nav-links a {
-                padding: 1rem;
-                text-align: center;
-                border-radius: 12px;
-                width: 100%;
-            }
-
-            .menu-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .hero-card {
-                padding: 2rem;
-            }
-
-            .hero-card h1 {
-                font-size: 2rem;
-            }
-
-            .dashboard {
-                padding: 1.5rem 1rem;
-                margin-top: 80px;
-            }
-
-            .section-header h2 {
-                font-size: 1.8rem;
-            }
-
-            .btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.95rem;
-            }
-        }
-
-        /* Decorative Flourishes */
-        .flourish {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.1;
-            color: var(--accent);
-            font-size: 8rem;
-        }
-
-        .flourish-1 {
-            top: 20%;
-            left: 5%;
-            transform: rotate(-15deg);
-        }
-
-        .flourish-2 {
-            bottom: 20%;
-            right: 5%;
-            transform: rotate(15deg);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brenna Sheppard | Learning & Development Specialist</title>
+  <meta name="description" content="Brenna Sheppard — Learning & Development professional, Technical Enablement Specialist, and instructional designer with 10+ years bridging human behavior, enterprise technology, and scalable training." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET & VARIABLES ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1a2e44;
+      --navy2:  #243d58;
+      --teal:   #0d7377;
+      --teal2:  #14a085;
+      --cream:  #f8f5f0;
+      --warm:   #f0ebe3;
+      --amber:  #c8864a;
+      --white:  #ffffff;
+      --muted:  #6b7280;
+      --border: #ddd8d0;
+      --text:   #2d3748;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --max-w: 1100px;
+      --section-pad: 96px 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.65;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ── DARK MODE ──────────────────────────────────────────── */
+    [data-theme="dark"] {
+      --cream:  #0f1923;
+      --warm:   #141f2b;
+      --white:  #1a2535;
+      --border: #2a3a4d;
+      --text:   #c8d6e5;
+      --muted:  #7a9ab0;
+    }
+    [data-theme="dark"] #about,
+    [data-theme="dark"] #skills        { background: #0f1923; }
+    [data-theme="dark"] #expertise,
+    [data-theme="dark"] #certifications { background: #141f2b; }
+    [data-theme="dark"] .expertise-card { background: #1a2535; border-color: #2a3a4d; }
+    [data-theme="dark"] .expertise-card:hover { border-color: var(--teal); }
+    [data-theme="dark"] .about-card    { background: #141f2b; }
+    [data-theme="dark"] .skills-group  { background: #141f2b; border-color: #2a3a4d; }
+    [data-theme="dark"] .skills-group-title { border-color: #2a3a4d; }
+    [data-theme="dark"] .skill-chip    { background: #1a2535; border-color: #2a3a4d; color: #c8d6e5; }
+    [data-theme="dark"] .skill-chip:hover { border-color: var(--teal); }
+    [data-theme="dark"] .cert-card     { background: #1a2535; border-color: #2a3a4d; }
+    [data-theme="dark"] .cert-name     { color: #c8d6e5; }
+    [data-theme="dark"] .section-title { color: #d0e0f0; }
+    [data-theme="dark"] .timeline-role { color: #d0e0f0; }
+
+    /* smooth transition for all theme-affected elements */
+    .expertise-card, .cert-card, .skills-group, .skill-chip,
+    .about-card, .skills-group-title, .cert-name, .section-title,
+    .timeline-role, section { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+
+    /* ── TOGGLE BUTTON ──────────────────────────────────────── */
+    .theme-toggle {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75);
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.15); color: white; }
+
+    /* ── NAVIGATION ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(26, 46, 68, 0.97);
+      backdrop-filter: blur(8px);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 18px;
+      color: white;
+      letter-spacing: -0.3px;
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--teal2); font-style: italic; }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: white; }
+
+    .nav-cta {
+      background: var(--teal);
+      color: white !important;
+      padding: 7px 16px;
+      border-radius: 6px;
+      transition: background 0.2s !important;
+      opacity: 1 !important;
+    }
+    .nav-cta:hover { background: var(--teal2) !important; }
+
+    /* ── HERO ───────────────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      background: var(--navy);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(13,115,119,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(13,115,119,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-left {
+      padding: 80px 60px 80px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal2);
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1px;
+      background: var(--teal2);
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 5vw, 68px);
+      font-weight: 300;
+      color: white;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--teal2);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(16px, 2vw, 21px);
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 32px;
+      letter-spacing: -0.2px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      max-width: 460px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--teal);
+      color: white;
+    }
+    .btn-primary:hover { background: var(--teal2); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: white; }
+
+    .hero-right {
+      padding: 80px 80px 80px 40px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-stat-card:hover {
+      background: rgba(255,255,255,0.07);
+      transform: translateX(4px);
+    }
+    .stat-icon {
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      background: rgba(13,115,119,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      color: white;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 2px;
+    }
+
+    /* ── SECTIONS ───────────────────────────────────────────── */
+    section { padding: var(--section-pad); }
+
+    .section-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 20px; height: 1px;
+      background: var(--teal);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      color: var(--navy);
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    .section-title em { font-style: italic; color: var(--teal); }
+
+    .section-intro {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 56px;
+    }
+
+    /* ── ABOUT ──────────────────────────────────────────────── */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-story p {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-story p:last-child { margin-bottom: 0; }
+    .about-story strong { color: var(--navy); font-weight: 600; }
+    .about-story em { color: var(--teal); font-style: italic; }
+
+    .about-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .about-card {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 24px;
+      border-left: 3px solid var(--teal);
+    }
+    .about-card-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .about-card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .about-card-list li {
+      font-size: 14px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .about-card-list li::before {
+      content: '→';
+      color: var(--teal);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      padding-bottom: 24px;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .timeline-content { flex: 1; padding-top: 8px; }
+    .timeline-year {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--teal);
+      margin-bottom: 2px;
+    }
+    .timeline-role {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── EXPERTISE ──────────────────────────────────────────── */
+    #expertise { background: var(--cream); }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .expertise-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .expertise-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--teal2));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .expertise-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(26,46,68,0.1);
+      border-color: var(--teal);
+    }
+    .expertise-card:hover::before { opacity: 1; }
+
+    .expertise-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .expertise-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .expertise-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .expertise-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(13,115,119,0.08);
+      color: var(--teal);
+      border: 1px solid rgba(13,115,119,0.15);
+    }
+
+    /* ── CASE STUDIES ───────────────────────────────────────── */
+    #work { background: var(--navy); }
+    #work .section-title { color: white; }
+    #work .section-tag { color: var(--teal2); }
+    #work .section-tag::before { background: var(--teal2); }
+    #work .section-intro { color: rgba(255,255,255,0.55); }
+
+    .case-studies {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .case-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .case-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(13,115,119,0.4);
+    }
+
+    .case-card-inner {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+
+    .case-sidebar {
+      background: rgba(13,115,119,0.12);
+      padding: 36px 32px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .case-number {
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .case-category {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal2);
+      margin-bottom: 8px;
+    }
+
+    .case-title-sm {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: white;
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+
+    .case-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .case-meta-item {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .case-meta-item span { color: rgba(255,255,255,0.7); }
+
+    .case-body {
+      padding: 36px 40px;
+    }
+
+    .case-section {
+      margin-bottom: 28px;
+    }
+    .case-section:last-child { margin-bottom: 0; }
+    .case-section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--teal2);
+      margin-bottom: 8px;
+    }
+    .case-section-text {
+      font-size: 15px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+    }
+    .case-section-text strong {
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+    }
+
+    .case-outcomes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .outcome-pill {
+      background: rgba(13,115,119,0.15);
+      border: 1px solid rgba(13,115,119,0.25);
+      border-radius: 10px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .outcome-num {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--teal2);
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .outcome-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.3;
+    }
+
+    /* ── SKILLS ─────────────────────────────────────────────── */
+    #skills { background: var(--white); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .skills-group {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 28px;
+      border: 1px solid var(--border);
+    }
+    .skills-group-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-chip {
+      font-size: 13px;
+      padding: 5px 12px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .skill-chip:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    /* ── CERTIFICATIONS ─────────────────────────────────────── */
+    #certifications { background: var(--cream); }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .cert-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px 20px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .cert-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(26,46,68,0.08);
+    }
+
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+    .cert-badge.active   { background: rgba(13,115,119,0.1); }
+    .cert-badge.progress { background: rgba(200,134,74,0.12); }
+    .cert-badge.planned  { background: rgba(26,46,68,0.06); }
+
+    .cert-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .cert-issuer {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .cert-status {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .cert-status.active   { background: rgba(13,115,119,0.1);  color: var(--teal); }
+    .cert-status.progress { background: rgba(200,134,74,0.12); color: var(--amber); }
+    .cert-status.planned  { background: rgba(26,46,68,0.07);   color: var(--navy); }
+
+    /* ── CONTACT ────────────────────────────────────────────── */
+    #contact { background: var(--navy); }
+    #contact .section-title { color: white; }
+    #contact .section-tag { color: var(--teal2); }
+    #contact .section-tag::before { background: var(--teal2); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contact-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.8);
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .contact-link:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(13,115,119,0.4);
+      color: white;
+    }
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(13,115,119,0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .availability-card {
+      background: rgba(13,115,119,0.12);
+      border: 1px solid rgba(13,115,119,0.25);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .availability-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--teal2);
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .availability-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .availability-list li {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .availability-list li::before {
+      content: '✓';
+      color: var(--teal2);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .resume-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 28px;
+      text-align: center;
+    }
+    .resume-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: rgba(0,0,0,0.3);
+      background: #111d2b;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+    footer a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+    }
+    footer a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── SCROLL ANIMATIONS ──────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      #home { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { display: none; }
+      .hero-left { padding: 60px 40px; }
+      .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+      .certs-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .case-card-inner { grid-template-columns: 1fr; }
+      .case-sidebar { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .case-number { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --section-pad: 64px 20px; }
+      .nav-links { display: none; }
+      .hero-left { padding: 40px 20px; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .case-outcomes { grid-template-columns: 1fr; }
+    }
+  </style>
+
 </head>
 <body>
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
 
-    <!-- Sparkle Container -->
-    <div class="sparkle-container" id="sparkles"></div>
+  <!-- ── NAVIGATION ──────────────────────────────────────────── -->
 
-    <!-- Decorative Flourishes -->
-    <div class="flourish flourish-1">✦</div>
-    <div class="flourish flourish-2">✦</div>
+  <nav>
+    <a href="#home" class="nav-brand">Brenna <em>Sheppard</em></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">☀️</button>
+  </nav>
 
-    <header id="header">
-        <nav>
-            <div class="logo">BS</div>
-            <ul class="nav-links" id="navLinks">
-                <li><a class="nav-link active" data-tab="home">Home</a></li>
-                <li><a class="nav-link" data-tab="about">About</a></li>
-                <li><a class="nav-link" data-tab="expertise">Expertise</a></li>
-                <li><a class="nav-link" data-tab="skills">Skills</a></li>
-                <li><a class="nav-link" data-tab="certifications">Certifications</a></li>
-                <li><a class="nav-link" data-tab="contact">Contact</a></li>
-            </ul>
-            <div class="nav-controls">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <span id="themeIcon">☀️</span>
-                </button>
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-            </div>
-        </nav>
-    </header>
+  <!-- ── HERO ────────────────────────────────────────────────── -->
 
-    <div class="dashboard">
-        <!-- Home Tab -->
-        <div class="tab-container active" id="home">
-            <div class="hero-dashboard">
-                <div class="hero-card">
-                    <h1>Brenna Sheppard</h1>
-                    <div class="typing-container">
-                        <h2 id="typingText"></h2><span class="cursor"></span>
-                    </div>
-                    <p>Transforming organizational performance through innovative training solutions, instructional design, and technology-enhanced learning experiences. Proven expertise in corporate training, curriculum development, and learning program implementation across diverse industries.</p>
-                    <div class="cta-buttons">
-                        <a class="btn btn-primary nav-link" data-tab="contact">✦ Let's Connect</a>
-                        <a href="BSheppardresume2025.pdf" class="btn btn-secondary" download>Download Resume</a>
-                    </div>
-                </div>
-                <div class="stats-card">
-                    <div class="stat-item">
-                        <h3>10+</h3>
-                        <p>Years of L&D Experience</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>8</h3>
-                        <p>Professional Certifications</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>500+</h3>
-                        <p>Professionals Trained</p>
-                    </div>
-                </div>
-            </div>
+  <section id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-overlay"></div>
 
-            <!-- Interactive Quick Actions -->
-            <div class="quick-actions">
-                <div class="quick-action nav-link" data-tab="expertise">
-                    <span class="quick-action-icon">🎯</span>
-                    <h4>View Expertise</h4>
-                    <p>Training & Design</p>
-                </div>
-                <div class="quick-action nav-link" data-tab="skills">
-                    <span class="quick-action-icon">💼</span>
-                    <h4>Browse Skills</h4>
-                    <p>Technologies & Methods</p>
-                </div>
-                <div class="quick-action nav-link" data-tab="certifications">
-                    <span class="quick-action-icon">📜</span>
-                    <h4>See Credentials</h4>
-                    <p>Certifications</p>
-                </div>
-            </div>
+```
+<div class="hero-left">
+  <div class="hero-eyebrow">Learning &amp; Development Specialist</div>
+  <h1 class="hero-name">Brenna<br><em>Sheppard</em></h1>
+  <p class="hero-title">Technical Enablement · Instructional Design · EdTech → Corporate</p>
+  <p class="hero-desc">
+    I help organizations build training programs that actually change behavior — drawing on a background in anthropology, child welfare systems, international education, and enterprise technology deployment.
+  </p>
+  <div class="hero-actions">
+    <a href="#work" class="btn btn-primary">View My Work ↓</a>
+    <a href="BSheppardresume2025.pdf" class="btn btn-outline" target="_blank">Download Resume</a>
+  </div>
+</div>
 
-            <div class="card-grid">
-                <div class="card nav-link" data-tab="expertise">
-                    <h3><span class="card-icon">🎯</span> Training & Facilitation</h3>
-                    <p>Expert facilitator delivering engaging learning experiences for adult audiences in virtual and in-person settings.</p>
-                </div>
-                <div class="card nav-link" data-tab="expertise">
-                    <h3><span class="card-icon">📐</span> Instructional Design</h3>
-                    <p>Systematic approach using ADDIE, SAM, and other ID models to create effective learning solutions.</p>
-                </div>
-                <div class="card nav-link" data-tab="expertise">
-                    <h3><span class="card-icon">💻</span> Educational Technology</h3>
-                    <p>Technology integration expertise with LMS platforms, authoring tools, and virtual training systems.</p>
-                </div>
-            </div>
-        </div>
+<div class="hero-right">
+  <div class="hero-stat-card">
+    <div class="stat-icon">🎓</div>
+    <div>
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Years in Learning & Development</div>
+    </div>
+  </div>
+  <div class="hero-stat-card">
+    <div class="stat-icon">👩‍💻</div>
+    <div>
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Educators & Professionals Trained</div>
+    </div>
+  </div>
+  <div class="hero-stat-card">
+    <div class="stat-icon">☁️</div>
+    <div>
+      <div class="stat-num">8</div>
+      <div class="stat-label">Professional Certifications</div>
+    </div>
+  </div>
+  <div class="hero-stat-card">
+    <div class="stat-icon">🌏</div>
+    <div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">Countries &amp; Contexts — TX, Taiwan, &amp; Beyond</div>
+    </div>
+  </div>
+</div>
+```
 
-        <!-- About Tab -->
-        <div class="tab-container" id="about">
-            <div class="section-header">
-                <h2>About Me</h2>
-                <p>Results-driven L&D professional with extensive experience across multiple industries</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-content">
-                    <p>I am a results-driven Learning & Development professional with 10+ years of experience designing and delivering impactful training solutions that drive measurable business outcomes. My background spans instructional design, corporate training, curriculum development, and educational technology implementation.</p>
-                    <p>Currently serving as a Digital Learning Specialist, I partner with organizations to implement technology-enhanced learning solutions, conduct customized professional development, and create scalable training programs. I excel at translating complex concepts into engaging learning experiences for adult learners across multiple delivery modalities.</p>
-                    <p>My expertise includes needs assessment, program design, LMS implementation, facilitation, and measurement of learning impact. I bring a unique blend of instructional expertise, project management skills, and technical proficiency to every engagement.</p>
-                    <p>Whether working as a trainer, consultant, instructional designer, or project lead, I am committed to creating learning solutions that align with organizational goals and deliver lasting performance improvement.</p>
-                </div>
-                <div class="value-props">
-                    <h3>What I Bring</h3>
-                    <ul class="value-list">
-                        <li>Adult learning expertise</li>
-                        <li>Instructional design</li>
-                        <li>Multi-industry experience</li>
-                        <li>Technology integration</li>
-                        <li>Data-driven approach</li>
-                        <li>Facilitation skills</li>
-                        <li>Project management</li>
-                        <li>Consultant mindset</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+  </section>
 
-        <!-- Expertise Tab -->
-        <div class="tab-container" id="expertise">
-            <div class="section-header">
-                <h2>Core Expertise</h2>
-                <p>Versatile learning professional ready for training, design, consulting, or project management roles</p>
-            </div>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>Training & Facilitation</h3>
-                    <p>Expert facilitator skilled in delivering engaging, interactive learning experiences for adult audiences. Proficient in both virtual and in-person delivery.</p>
-                    <ul>
-                        <li>Corporate training program design</li>
-                        <li>Customized onsite training</li>
-                        <li>Technology implementation support</li>
-                        <li>Professional development workshops</li>
-                        <li>Conference presentations</li>
-                        <li>Train-the-trainer programs</li>
-                    </ul>
-                </div>
+  <!-- ── ABOUT ────────────────────────────────────────────────── -->
 
-                <div class="card">
-                    <h3>Instructional Design</h3>
-                    <p>Systematic approach to designing learning solutions using ADDIE, SAM, and other ID models. Skilled at needs assessment and evaluation.</p>
-                    <ul>
-                        <li>Learning needs analysis</li>
-                        <li>Course design & curriculum</li>
-                        <li>Multimedia content development</li>
-                        <li>Assessment design</li>
-                        <li>Job aids creation</li>
-                        <li>Program documentation</li>
-                    </ul>
-                </div>
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-tag">About Me</div>
+      <h2 class="section-title">A career built on<br><em>understanding people</em></h2>
 
-                <div class="card">
-                    <h3>Educational Technology</h3>
-                    <p>Technology-savvy professional experienced in implementing and optimizing learning technologies and digital solutions.</p>
-                    <ul>
-                        <li>LMS implementation</li>
-                        <li>EdTech tool evaluation</li>
-                        <li>Digital content creation</li>
-                        <li>Virtual training platforms</li>
-                        <li>Google Workspace & Microsoft 365</li>
-                        <li>Interactive display technology</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3>Program Management</h3>
-                    <p>Strategic partner who can lead learning initiatives from conception through evaluation with strong stakeholder management.</p>
-                    <ul>
-                        <li>Learning strategy development</li>
-                        <li>Stakeholder collaboration</li>
-                        <li>Needs assessment</li>
-                        <li>Budget & resource management</li>
-                        <li>Performance metrics & ROI</li>
-                        <li>Continuous improvement</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Skills Tab -->
-        <div class="tab-container" id="skills">
-            <div class="section-header">
-                <h2>Skills & Competencies</h2>
-                <p>Comprehensive skillset across learning technologies, design, delivery, and management</p>
-            </div>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>Learning Technologies</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Google Workspace</span>
-                        <span class="skill-tag">Microsoft 365</span>
-                        <span class="skill-tag">LMS Platforms</span>
-                        <span class="skill-tag">Zoom/Teams</span>
-                        <span class="skill-tag">Clear Touch</span>
-                        <span class="skill-tag">Interactive Displays</span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>Instructional Design</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">ADDIE Model</span>
-                        <span class="skill-tag">Needs Assessment</span>
-                        <span class="skill-tag">Learning Objectives</span>
-                        <span class="skill-tag">Assessment Design</span>
-                        <span class="skill-tag">Content Development</span>
-                        <span class="skill-tag">Evaluation</span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>Training Delivery</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Facilitation</span>
-                        <span class="skill-tag">Presentation</span>
-                        <span class="skill-tag">Virtual Training</span>
-                        <span class="skill-tag">Workshop Design</span>
-                        <span class="skill-tag">Coaching</span>
-                        <span class="skill-tag">Adult Learning</span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>Program Management</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Project Planning</span>
-                        <span class="skill-tag">Stakeholder Management</span>
-                        <span class="skill-tag">Change Management</span>
-                        <span class="skill-tag">Performance Metrics</span>
-                        <span class="skill-tag">Budget Management</span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>Subject Matter Expertise</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">STEM Education</span>
-                        <span class="skill-tag">EdTech Training</span>
-                        <span class="skill-tag">Differentiation</span>
-                        <span class="skill-tag">ESL/Multilingual</span>
-                        <span class="skill-tag">Accessibility</span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>Soft Skills</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Communication</span>
-                        <span class="skill-tag">Problem-Solving</span>
-                        <span class="skill-tag">Adaptability</span>
-                        <span class="skill-tag">Collaboration</span>
-                        <span class="skill-tag">Leadership</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Certifications Tab -->
-        <div class="tab-container" id="certifications">
-            <div class="section-header">
-                <h2>Certifications & Credentials</h2>
-                <p>Continuously expanding expertise through professional development and certification</p>
-            </div>
-            <div class="card-grid">
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <!-- Google Logo SVG -->
-                        <svg viewBox="0 0 48 48">
-                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-                        </svg>
-                    </div>
-                    <h3>Google Educator Level 1</h3>
-                    <p>Google for Education</p>
-                    <span class="cert-badge">Certified</span>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <!-- Google Logo SVG -->
-                        <svg viewBox="0 0 48 48">
-                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-                        </svg>
-                    </div>
-                    <h3>Google Educator Level 2</h3>
-                    <p>Google for Education</p>
-                    <span class="cert-badge">Certified</span>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <!-- AWS Logo SVG -->
-                        <svg viewBox="0 0 48 48">
-                            <path fill="#252F3E" d="M13.527 21.529c0 .597.064 1.08.176 1.435.128.356.287.746.512 1.162.08.128.112.256.112.368 0 .16-.096.32-.304.48l-1.008.672c-.144.096-.288.144-.416.144-.16 0-.32-.08-.48-.224-.224-.24-.416-.496-.576-.752-.16-.272-.32-.576-.496-.944-1.248 1.472-2.816 2.208-4.704 2.208-1.344 0-2.416-.384-3.2-1.152-.784-.768-1.184-1.792-1.184-3.072 0-1.36.48-2.464 1.456-3.296.976-.832 2.272-1.248 3.904-1.248.544 0 1.104.048 1.696.128.592.08 1.2.208 1.84.352v-1.168c0-1.216-.256-2.064-.752-2.56-.512-.496-1.376-.736-2.608-.736-.56 0-1.136.064-1.728.208-.592.144-1.168.32-1.728.544-.256.112-.448.176-.56.208-.112.032-.192.048-.256.048-.224 0-.336-.16-.336-.496v-.784c0-.256.032-.448.112-.56.08-.112.224-.224.448-.336.56-.288 1.232-.528 2.016-.72.784-.208 1.616-.304 2.496-.304 1.904 0 3.296.432 4.176 1.296.864.864 1.312 2.176 1.312 3.936v5.184h.016zm-6.496 2.432c.528 0 1.072-.096 1.648-.288.576-.192 1.088-.544 1.52-1.024.256-.304.448-.64.544-1.024.096-.384.16-.848.16-1.392v-.672c-.464-.112-.96-.208-1.472-.272-.512-.064-1.008-.096-1.504-.096-1.072 0-1.856.208-2.384.64-.528.432-.784 1.04-.784 1.84 0 .752.192 1.312.592 1.696.384.4.944.592 1.68.592zm12.848 1.728c-.288 0-.48-.048-.608-.16-.128-.096-.24-.304-.336-.576l-3.76-12.384c-.096-.288-.144-.48-.144-.576 0-.224.112-.352.336-.352h1.568c.304 0 .512.048.624.16.128.096.224.304.32.576l2.688 10.592 2.496-10.592c.08-.288.176-.48.304-.576.128-.112.352-.16.64-.16h1.28c.304 0 .512.048.64.16.128.096.24.304.304.576l2.528 10.72 2.768-10.72c.096-.288.208-.48.32-.576.128-.112.336-.16.624-.16h1.488c.224 0 .352.112.352.352 0 .064-.016.144-.032.24-.016.096-.048.208-.112.368l-3.856 12.384c-.096.288-.208.48-.336.576-.128.096-.336.16-.608.16h-1.376c-.304 0-.512-.048-.64-.16-.128-.112-.24-.304-.304-.592l-2.48-10.32-2.464 10.32c-.08.288-.176.48-.304.592-.128.112-.352.16-.64.16h-1.376zm20.544.384c-.832 0-1.664-.096-2.464-.288-.8-.192-1.424-.4-1.856-.624-.272-.144-.448-.304-.512-.448-.064-.144-.096-.304-.096-.448v-.816c0-.336.128-.496.368-.496.096 0 .192.016.288.048.096.032.24.096.4.16.544.24 1.136.432 1.76.56.64.128 1.264.192 1.904.192 1.008 0 1.792-.176 2.336-.528.544-.352.816-.864.816-1.52 0-.448-.144-.816-.432-1.104-.288-.288-.832-.544-1.616-.784l-2.32-.72c-1.168-.368-2.032-.912-2.576-1.632-.544-.704-.816-1.488-.816-2.336 0-.672.144-1.264.432-1.776.288-.512.672-.96 1.152-1.312.48-.368 1.024-.64 1.664-.832.64-.192 1.312-.272 2.016-.272.352 0 .72.016 1.072.064.368.048.704.112 1.04.176.32.08.624.16.912.256.288.096.512.192.672.288.224.128.384.256.48.4.096.128.144.304.144.528v.752c0 .336-.128.512-.368.512-.128 0-.336-.064-.608-.192-.912-.416-1.936-.624-3.072-.624-.912 0-1.632.144-2.128.448-.496.304-.752.768-.752 1.408 0 .448.16.832.48 1.136.32.304.912.576 1.76.832l2.272.704c1.152.368 1.984.88 2.48 1.536.496.656.736 1.408.736 2.24 0 .688-.144 1.312-.416 1.856-.288.544-.672 1.024-1.168 1.408-.496.4-1.088.688-1.776.896-.72.224-1.488.32-2.32.32z"/>
-                            <path fill="#FF9900" d="M43.632 33.248c-5.344 3.952-13.104 6.048-19.776 6.048-9.36 0-17.792-3.456-24.176-9.216-.496-.448-.048-1.072.544-.72 6.88 4 15.392 6.416 24.192 6.416 5.936 0 12.464-1.232 18.464-3.776.896-.4 1.664.592.752 1.248z"/>
-                            <path fill="#FF9900" d="M45.824 30.72c-.688-.88-4.544-.416-6.272-.208-.528.064-.608-.4-.128-.736 3.072-2.16 8.112-1.536 8.704-.816.592.736-.16 5.792-3.04 8.208-.448.368-.864.176-.672-.32.656-1.632 2.096-5.248 1.408-6.128z"/>
-                        </svg>
-                    </div>
-                    <h3>AWS Cloud Practitioner</h3>
-                    <p>Amazon Web Services</p>
-                    <span class="cert-badge">Certified</span>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <!-- Apple Logo SVG -->
-                        <svg viewBox="0 0 48 48">
-                            <path fill="#555555" d="M39.665 34.656c-.92 2.04-1.36 2.95-2.54 4.75-1.65 2.52-3.98 5.66-6.87 5.69-2.57.02-3.23-1.67-6.71-1.65-3.49.02-4.21 1.68-6.79 1.66-2.89-.03-5.1-2.86-6.75-5.37-4.6-7.04-5.08-15.3-2.25-19.69 2.02-3.12 5.2-4.95 8.18-4.95 3.04 0 4.95 1.68 7.46 1.68 2.44 0 3.92-1.68 7.44-1.68 2.64 0 5.45 1.44 7.47 3.92-6.57 3.6-5.5 12.97 1.36 15.64zM28.27 10.3c1.27-1.63 2.24-3.94 1.88-6.3-2.08.15-4.51 1.46-5.93 3.18-1.29 1.56-2.36 3.89-1.95 6.14 2.27.08 4.62-1.26 6-3.02z"/>
-                        </svg>
-                    </div>
-                    <h3>Apple Teacher</h3>
-                    <p>Apple Education</p>
-                    <span class="cert-badge">Certified</span>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <!-- PLTW Logo SVG -->
-                        <svg viewBox="0 0 48 48">
-                            <circle cx="24" cy="24" r="22" fill="#00629B"/>
-                            <path fill="#FFFFFF" d="M12 16h6c3.31 0 6 2.02 6 5s-2.69 5-6 5h-3v6h-3V16zm3 7.5h3c1.66 0 3-.84 3-2.5s-1.34-2.5-3-2.5h-3v5zM26 16h3v13h7v3H26V16z"/>
-                        </svg>
-                    </div>
-                    <h3>PLTW Launch Educator</h3>
-                    <p>Project Lead The Way</p>
-                    <span class="cert-badge">Certified</span>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <!-- ESL Certificate SVG -->
-                        <svg viewBox="0 0 48 48">
-                            <rect x="4" y="8" width="40" height="32" rx="4" fill="#1E3A5F"/>
-                            <path fill="#FFFFFF" d="M12 18h8v2h-5v3h4v2h-4v3h5v2h-8V18zM22 28c0-1.66 1.34-2.5 3-2.5.83 0 1.5.17 2 .5v-1c0-.83-.67-1.5-1.5-1.5-.67 0-1.17.25-1.5.75l-1.5-1.25c.67-1 1.83-1.5 3-1.5 1.93 0 3.5 1.34 3.5 3.5v5h-2v-1c-.5.67-1.33 1.25-2.5 1.25-1.66 0-2.5-1.09-2.5-2.25zm5-.25v-1c-.33-.33-.83-.5-1.5-.5s-1.5.33-1.5 1 .67 1 1.5 1 1.17-.17 1.5-.5zM31 18h3v12h-3V18z"/>
-                            <circle cx="38" cy="14" r="3" fill="#4CAF50"/>
-                        </svg>
-                    </div>
-                    <h3>ESL Supplemental</h3>
-                    <p>Texas Education Agency</p>
-                    <span class="cert-badge">Certified</span>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <!-- Google Logo SVG -->
-                        <svg viewBox="0 0 48 48">
-                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-                        </svg>
-                    </div>
-                    <h3>Google Project Management</h3>
-                    <p>Coursera</p>
-                    <span class="cert-badge">In Progress</span>
-                </div>
-
-                <div class="cert-card">
-                    <div class="cert-logo">
-                        <!-- PMI Logo SVG -->
-                        <svg viewBox="0 0 48 48">
-                            <rect x="2" y="2" width="44" height="44" rx="6" fill="#0077B5"/>
-                            <path fill="#FFFFFF" d="M10 14h6c3 0 5 1.5 5 4.5S19 23 16 23h-3v7h-3V14zm3 6.5h3c1.38 0 2-.75 2-2s-.62-2-2-2h-3v4zM23 14h3l3 11 3-11h3v16h-2.5V19l-2.75 11h-2L25.5 19v11H23V14z"/>
-                            <path fill="#FFC107" d="M37 34h3v4h-3z"/>
-                        </svg>
-                    </div>
-                    <h3>CAPM</h3>
-                    <p>PMI</p>
-                    <span class="cert-badge">Upcoming</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contact Tab -->
-        <div class="tab-container" id="contact">
-            <div class="section-header">
-                <h2>Let's Connect</h2>
-                <p>Open to opportunities in corporate training, instructional design, consulting, and L&D roles</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <h3>Get In Touch</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">I'm open to full-time positions, contract work, and consulting opportunities. Let's discuss how I can add value to your organization.</p>
-                    <div class="contact-links">
-                        <a href="mailto:hello@brennasheppard.com" class="contact-link">
-                            <span>📧</span> hello@brennasheppard.com
-                        </a>
-                        <a href="mailto:info@brennasheppard.com" class="contact-link">
-                            <span>📧</span> info@brennasheppard.com
-                        </a>
-                        <a href="mailto:contact@brennasheppard.me" class="contact-link">
-                            <span>📧</span> contact@brennasheppard.me
-                        </a>
-                        <a href="https://linkedin.com/in/brenna-sheppard" class="contact-link" target="_blank" rel="noopener noreferrer">
-                            <span>💼</span> linkedin.com/in/brenna-sheppard
-                        </a>
-                    </div>
-                </div>
-                <div class="contact-card">
-                    <h3>Download Resume</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Get a comprehensive overview of my experience, skills, and accomplishments.</p>
-                    <a href="BSheppardresume2025.pdf" class="btn btn-primary" download style="display: block; text-align: center; justify-content: center;">✦ Download Resume (PDF)</a>
-                </div>
-            </div>
-        </div>
+```
+  <div class="about-grid">
+    <div class="about-story fade-up">
+      <p>
+        I studied <strong>Anthropology at the University of North Texas</strong> because I wanted to understand how human systems work — how people make decisions, adopt new behaviors, and navigate change within their cultures. I had no idea that degree would become the foundation of a career in learning and development. But in retrospect, it's the most relevant thing I've ever studied.
+      </p>
+      <p>
+        After graduating in 2007, I spent several years as a <strong>Conservatorship Worker with the Texas Department of Family and Protective Services (TDFPS)</strong>. That work taught me more about human behavior, high-stakes communication, and system navigation than any classroom could. I learned to write documentation that held up in court, coordinate across agencies, and build trust with people in crisis. I also discovered I was drawn to training others — I spent time onboarding and mentoring new caseworkers on documentation and case management procedures.
+      </p>
+      <p>
+        In 2010, I made a deliberate pivot and <strong>spent a year teaching English in Taiwan</strong>. Designing curriculum for learners who don't share your language forces a kind of instructional clarity that's hard to develop any other way. You learn to read your audience with precision, strip content down to what's essential, and communicate across cultural distance.
+      </p>
+      <p>
+        When I returned to Texas in 2012, I spent <strong>over a decade in K–12 education</strong> teaching Mathematics, Science, STEM, and Dual Language — and increasingly focused on the intersection of technology and learning. I became the campus tech champion, led professional development sessions, and managed device deployments.
+      </p>
+      <p>
+        That led to my current role as a <strong>Digital Learning Specialist at Clear Touch Interactive</strong>, where I lead district-wide technology rollouts, design and deliver training programs, and apply data-driven frameworks to optimize how learning actually gets to people. I'm also <strong>AWS Cloud Practitioner certified</strong> and actively building technical depth to support enterprise-scale enablement roles.
+      </p>
+      <p>
+        What connects all of it is the same question I've been asking since undergrad: <em>how do people actually learn, and what gets in the way?</em>
+      </p>
     </div>
 
-    <footer>
-        <p>© 2026 Brenna Sheppard. All rights reserved.</p>
-    </footer>
+    <div class="about-sidebar fade-up">
 
-    <script>
-        // Create floating particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 20;
+      <div class="about-card">
+        <div class="about-card-title">What I'm seeking</div>
+        <ul class="about-card-list">
+          <li>Technical Enablement Specialist</li>
+          <li>Customer Education Manager</li>
+          <li>L&amp;D Specialist / Program Manager</li>
+          <li>Instructional Designer (SaaS/Cloud)</li>
+          <li>Corporate Trainer — Enterprise Tech</li>
+        </ul>
+      </div>
 
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                container.appendChild(particle);
-            }
+      <div style="margin-top: 8px;">
+        <div class="about-card-title" style="color:var(--muted); font-size:11px; letter-spacing:1px; text-transform:uppercase; font-weight:600; margin-bottom:16px;">Career Timeline</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot">🎓</div>
+            <div class="timeline-content">
+              <div class="timeline-year">2007</div>
+              <div class="timeline-role">BA in Anthropology — UNT</div>
+              <div class="timeline-desc">Foundation in human behavior, cultural systems, and ethnographic research</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">🏛️</div>
+            <div class="timeline-content">
+              <div class="timeline-year">2007–2010</div>
+              <div class="timeline-role">Conservatorship Worker — TDFPS</div>
+              <div class="timeline-desc">Case management, compliance documentation, caseworker training</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">🌏</div>
+            <div class="timeline-content">
+              <div class="timeline-year">2010–2011</div>
+              <div class="timeline-role">English Teacher — Taiwan</div>
+              <div class="timeline-desc">Cross-cultural curriculum design and instructional adaptation</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">📚</div>
+            <div class="timeline-content">
+              <div class="timeline-year">2012–2023</div>
+              <div class="timeline-role">Classroom Teacher — Texas</div>
+              <div class="timeline-desc">Math, Science, STEM, Dual Language — campus tech champion</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">💡</div>
+            <div class="timeline-content">
+              <div class="timeline-year">2023–Present</div>
+              <div class="timeline-role">Digital Learning Specialist — Clear Touch</div>
+              <div class="timeline-desc">Enterprise EdTech rollouts, training design, performance analytics</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ── EXPERTISE ────────────────────────────────────────────── -->
+
+  <section id="expertise">
+    <div class="section-inner">
+      <div class="section-tag">Core Expertise</div>
+      <h2 class="section-title">Four areas where I<br><em>consistently deliver</em></h2>
+      <p class="section-intro">Fifteen years of practice across education, social services, and enterprise technology have focused into four distinct competencies.</p>
+
+```
+  <div class="expertise-grid">
+    <div class="expertise-card fade-up">
+      <span class="expertise-icon">🎤</span>
+      <div class="expertise-name">Training & Facilitation</div>
+      <p class="expertise-desc">Designing and delivering adult learning experiences that engage, inform, and change behavior — across virtual, in-person, and hybrid environments.</p>
+      <div class="expertise-tags">
+        <span class="tag">Adult Learning</span>
+        <span class="tag">Workshop Design</span>
+        <span class="tag">Train-the-Trainer</span>
+        <span class="tag">500+ Trained</span>
+      </div>
+    </div>
+
+    <div class="expertise-card fade-up">
+      <span class="expertise-icon">📐</span>
+      <div class="expertise-name">Instructional Design</div>
+      <p class="expertise-desc">Systematic course and curriculum development using ADDIE, SAM, and station rotation models, with a strong emphasis on needs analysis and measurable outcomes.</p>
+      <div class="expertise-tags">
+        <span class="tag">ADDIE / SAM</span>
+        <span class="tag">Needs Analysis</span>
+        <span class="tag">Assessment Design</span>
+        <span class="tag">Job Aids</span>
+      </div>
+    </div>
+
+    <div class="expertise-card fade-up">
+      <span class="expertise-icon">🖥️</span>
+      <div class="expertise-name">Technical Enablement</div>
+      <p class="expertise-desc">End-to-end enterprise technology rollouts — from device policy management and firmware workflows to adoption analytics and stakeholder documentation suites.</p>
+      <div class="expertise-tags">
+        <span class="tag">Enterprise Rollout</span>
+        <span class="tag">AWS Certified</span>
+        <span class="tag">MDM / Policy</span>
+        <span class="tag">Adoption Analytics</span>
+      </div>
+    </div>
+
+    <div class="expertise-card fade-up">
+      <span class="expertise-icon">📊</span>
+      <div class="expertise-name">Program Management</div>
+      <p class="expertise-desc">Leading learning initiatives from kickoff through evaluation — stakeholder alignment, deliverable planning, performance metrics, and continuous improvement cycles.</p>
+      <div class="expertise-tags">
+        <span class="tag">Project Leadership</span>
+        <span class="tag">Change Management</span>
+        <span class="tag">ROI Measurement</span>
+        <span class="tag">Stakeholder Comms</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ── CASE STUDIES ──────────────────────────────────────────── -->
+
+  <section id="work">
+    <div class="section-inner">
+      <div class="section-tag">Work Samples</div>
+      <h2 class="section-title">Three projects that<br><em>show the work</em></h2>
+      <p class="section-intro">Each project below is documented as a case study — the situation, the approach, and what happened. No files I don't own, just the real story.</p>
+
+```
+  <div class="case-studies">
+
+    <!-- Case Study 1 -->
+    <div class="case-card fade-up">
+      <div class="case-card-inner">
+        <div class="case-sidebar">
+          <div class="case-number">01</div>
+          <div>
+            <div class="case-category">Enterprise Technology Rollout</div>
+            <div class="case-title-sm">Clear Touch Connect District Implementation</div>
+            <div class="case-meta">
+              <div class="case-meta-item">📍 Context: <span>Comal ISD, TX</span></div>
+              <div class="case-meta-item">👥 Scale: <span>500+ educators</span></div>
+              <div class="case-meta-item">🛠 Role: <span>Lead Specialist</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-section">
+            <div class="case-section-label">The Situation</div>
+            <p class="case-section-text">Comal ISD needed to roll out a new enterprise platform — Clear Touch Connect — to hundreds of teachers and administrators across multiple campuses. The challenge wasn't the technology itself; it was that <strong>educators had no existing mental model for how to use it</strong>, adoption of previous platforms had been inconsistent, and there was limited time in professional development windows to train at scale. Helpdesk tickets from confused users were an early and predictable risk.</p>
+          </div>
+          <div class="case-section">
+            <div class="case-section-label">The Approach</div>
+            <p class="case-section-text">Rather than defaulting to a single all-hands training session, I designed a <strong>layered documentation suite</strong> to support multiple learning paths simultaneously. This included a plain-language teacher one-pager for the classroom-level user, an admin quick-start guide for campus leads, a printable login poster for rooms without easy digital reference, and a comprehensive FAQ document surfacing the most common failure points. I mapped each artifact to a different stage in the user journey — from first login through confident daily use — so that the documentation itself acted as a distributed training system that didn't require a facilitator to be present.</p>
+          </div>
+          <div class="case-section">
+            <div class="case-section-label">The Outcomes</div>
+            <div class="case-outcomes">
+              <div class="outcome-pill">
+                <span class="outcome-num">~30%</span>
+                <span class="outcome-label">Estimated reduction in helpdesk tickets post-rollout</span>
+              </div>
+              <div class="outcome-pill">
+                <span class="outcome-num">500+</span>
+                <span class="outcome-label">Educators reached across the district</span>
+              </div>
+              <div class="outcome-pill">
+                <span class="outcome-num">4</span>
+                <span class="outcome-label">Documentation artifacts covering every user type</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case Study 2 -->
+    <div class="case-card fade-up">
+      <div class="case-card-inner">
+        <div class="case-sidebar">
+          <div class="case-number">02</div>
+          <div>
+            <div class="case-category">Instructional Design · Interactive Media</div>
+            <div class="case-title-sm">Heritage Night Interactive Panel Experience</div>
+            <div class="case-meta">
+              <div class="case-meta-item">📍 Context: <span>District Community Event</span></div>
+              <div class="case-meta-item">🖥️ Tech: <span>Nuiteq Chorus / 75" panels</span></div>
+              <div class="case-meta-item">🛠 Role: <span>Designer &amp; Builder</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-section">
+            <div class="case-section-label">The Situation</div>
+            <p class="case-section-text">The district was hosting a Heritage Night event celebrating student and community cultural backgrounds. The request was to use the district's 75-inch Clear Touch interactive panels as audience-facing exhibit stations — but <strong>no one had designed interactive public-facing content for these panels before</strong>. There was no template, no precedent, and no dedicated design team. I was brought in to design and build the full experience from scratch.</p>
+          </div>
+          <div class="case-section">
+            <div class="case-section-label">The Approach</div>
+            <p class="case-section-text">I designed <strong>10 fully interactive exhibit panels</strong> using Nuiteq Chorus, each built around a specific heritage station (including Spanish and German language heritage content). Each board included a branded intro screen, a navigation hub, and embedded audio and video components — all designed for a public audience navigating without any instruction. I built the experience so that a curious attendee with no technical background could walk up to a panel and have a meaningful, self-directed interaction. The complete package was built as an upload-ready ZIP archive for easy deployment and future reuse by the district.</p>
+          </div>
+          <div class="case-section">
+            <div class="case-section-label">The Outcomes</div>
+            <div class="case-outcomes">
+              <div class="outcome-pill">
+                <span class="outcome-num">10</span>
+                <span class="outcome-label">Fully built interactive exhibit boards</span>
+              </div>
+              <div class="outcome-pill">
+                <span class="outcome-num">2</span>
+                <span class="outcome-label">Heritage languages with bilingual audio/video</span>
+              </div>
+              <div class="outcome-pill">
+                <span class="outcome-num">0</span>
+                <span class="outcome-label">Prior templates — designed entirely from scratch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case Study 3 -->
+    <div class="case-card fade-up">
+      <div class="case-card-inner">
+        <div class="case-sidebar">
+          <div class="case-number">03</div>
+          <div>
+            <div class="case-category">Training Effectiveness · Data-Driven Design</div>
+            <div class="case-title-sm">Goldilocks Zone Framework for Training Optimization</div>
+            <div class="case-meta">
+              <div class="case-meta-item">📍 Context: <span>Clear Touch — Multi-District</span></div>
+              <div class="case-meta-item">📊 Output: <span>Framework + Analytics Report</span></div>
+              <div class="case-meta-item">🛠 Role: <span>Framework Designer</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-section">
+            <div class="case-section-label">The Situation</div>
+            <p class="case-section-text">On-site training delivery was generating a pattern I started to notice across multiple districts: <strong>some training sessions were too short to be effective, others were longer than necessary and wasting everyone's time</strong>, and there was no systematic way to evaluate which was which. The default was to schedule training uniformly — same format, same duration, regardless of what the audience actually needed. This meant that both over-training and under-training were routine, and neither was being measured.</p>
+          </div>
+          <div class="case-section">
+            <div class="case-section-label">The Approach</div>
+            <p class="case-section-text">I developed the <strong>Goldilocks Zone framework</strong> — a data-driven model for determining the appropriate scope, format, and duration of training based on the audience's existing fluency, the complexity of the content, and the risk profile of under-adoption. The framework identified when on-site delivery added value versus when it was redundant, and established criteria for deciding between in-person, hybrid, asynchronous, or documentation-only approaches. The output was a branded analysis report and PowerPoint delivered to district and regional stakeholders, with a strategic implementation roadmap for applying the framework to future training planning.</p>
+          </div>
+          <div class="case-section">
+            <div class="case-section-label">The Outcomes</div>
+            <div class="case-outcomes">
+              <div class="outcome-pill">
+                <span class="outcome-num">↓</span>
+                <span class="outcome-label">Reduced unnecessary on-site delivery time</span>
+              </div>
+              <div class="outcome-pill">
+                <span class="outcome-num">↑</span>
+                <span class="outcome-label">Training effectiveness per hour invested</span>
+              </div>
+              <div class="outcome-pill">
+                <span class="outcome-num">📋</span>
+                <span class="outcome-label">Repeatable decision framework for future programs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ── SKILLS ────────────────────────────────────────────────── -->
+
+  <section id="skills">
+    <div class="section-inner">
+      <div class="section-tag">Skills & Competencies</div>
+      <h2 class="section-title">What I bring to<br><em>every engagement</em></h2>
+      <p class="section-intro">A practical skill set built from doing — not just knowing.</p>
+
+```
+  <div class="skills-grid">
+    <div class="skills-group fade-up">
+      <div class="skills-group-title">Learning Technologies</div>
+      <div class="skills-list">
+        <span class="skill-chip">Clear Touch Interactive</span>
+        <span class="skill-chip">Nuiteq Chorus</span>
+        <span class="skill-chip">Google Workspace</span>
+        <span class="skill-chip">Microsoft 365</span>
+        <span class="skill-chip">Canvas / Instructure</span>
+        <span class="skill-chip">Apple School Manager</span>
+        <span class="skill-chip">Zoom / Teams</span>
+        <span class="skill-chip">LMS Platforms</span>
+      </div>
+    </div>
+
+    <div class="skills-group fade-up">
+      <div class="skills-group-title">Cloud & Infrastructure</div>
+      <div class="skills-list">
+        <span class="skill-chip">AWS (EC2, S3, IAM, VPC)</span>
+        <span class="skill-chip">AWS CLI</span>
+        <span class="skill-chip">Android Enterprise MDM</span>
+        <span class="skill-chip">Device Policy Management</span>
+        <span class="skill-chip">Firmware Management</span>
+        <span class="skill-chip">VirtualBox</span>
+        <span class="skill-chip">Ubuntu / Linux</span>
+      </div>
+    </div>
+
+    <div class="skills-group fade-up">
+      <div class="skills-group-title">Instructional Design</div>
+      <div class="skills-list">
+        <span class="skill-chip">ADDIE Model</span>
+        <span class="skill-chip">SAM Model</span>
+        <span class="skill-chip">Needs Assessment</span>
+        <span class="skill-chip">Station Rotation</span>
+        <span class="skill-chip">Curriculum Design</span>
+        <span class="skill-chip">Assessment Design</span>
+        <span class="skill-chip">Job Aids</span>
+        <span class="skill-chip">Adult Learning Theory</span>
+      </div>
+    </div>
+
+    <div class="skills-group fade-up">
+      <div class="skills-group-title">Training Delivery</div>
+      <div class="skills-list">
+        <span class="skill-chip">Facilitation</span>
+        <span class="skill-chip">Virtual Training</span>
+        <span class="skill-chip">Workshop Design</span>
+        <span class="skill-chip">Train-the-Trainer</span>
+        <span class="skill-chip">Coaching</span>
+        <span class="skill-chip">Conference Presenting</span>
+      </div>
+    </div>
+
+    <div class="skills-group fade-up">
+      <div class="skills-group-title">Program Management</div>
+      <div class="skills-list">
+        <span class="skill-chip">Project Planning</span>
+        <span class="skill-chip">Stakeholder Management</span>
+        <span class="skill-chip">Change Management</span>
+        <span class="skill-chip">Performance Metrics</span>
+        <span class="skill-chip">Budget Management</span>
+        <span class="skill-chip">Rollout Documentation</span>
+      </div>
+    </div>
+
+    <div class="skills-group fade-up">
+      <div class="skills-group-title">Subject Matter Expertise</div>
+      <div class="skills-list">
+        <span class="skill-chip">STEM Education</span>
+        <span class="skill-chip">Dual Language</span>
+        <span class="skill-chip">ESL / Multilingual</span>
+        <span class="skill-chip">Behavioral Science</span>
+        <span class="skill-chip">Cross-Cultural Communication</span>
+        <span class="skill-chip">Accessibility</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ── CERTIFICATIONS ────────────────────────────────────────── -->
+
+  <section id="certifications">
+    <div class="section-inner">
+      <div class="section-tag">Credentials</div>
+      <h2 class="section-title">Certifications &amp;<br><em>professional development</em></h2>
+      <p class="section-intro">Continuously building technical and professional credibility through verified credentials.</p>
+
+```
+  <div class="certs-grid">
+    <div class="cert-card fade-up">
+      <div class="cert-badge active">☁️</div>
+      <div class="cert-name">AWS Cloud Practitioner</div>
+      <div class="cert-issuer">Amazon Web Services</div>
+      <span class="cert-status active">Certified</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-badge active">🎓</div>
+      <div class="cert-name">Google Educator Level 1</div>
+      <div class="cert-issuer">Google for Education</div>
+      <span class="cert-status active">Certified</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-badge active">🎓</div>
+      <div class="cert-name">Google Educator Level 2</div>
+      <div class="cert-issuer">Google for Education</div>
+      <span class="cert-status active">Certified</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-badge active">🍎</div>
+      <div class="cert-name">Apple Teacher</div>
+      <div class="cert-issuer">Apple Education</div>
+      <span class="cert-status active">Certified</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-badge active">🔬</div>
+      <div class="cert-name">PLTW Launch Educator</div>
+      <div class="cert-issuer">Project Lead The Way</div>
+      <span class="cert-status active">Certified</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-badge active">📜</div>
+      <div class="cert-name">ESL Supplemental</div>
+      <div class="cert-issuer">Texas Education Agency</div>
+      <span class="cert-status active">Certified</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-badge progress">📋</div>
+      <div class="cert-name">Google Project Management</div>
+      <div class="cert-issuer">Google / Coursera</div>
+      <span class="cert-status progress">In Progress</span>
+    </div>
+    <div class="cert-card fade-up">
+      <div class="cert-badge planned">🎯</div>
+      <div class="cert-name">CAPM</div>
+      <div class="cert-issuer">Project Management Institute</div>
+      <span class="cert-status planned">Planned 2026</span>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ── CONTACT ───────────────────────────────────────────────── -->
+
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title">Let's talk about<br><em>what you're building</em></h2>
+
+```
+  <div class="contact-grid">
+    <div>
+      <p class="contact-desc">
+        I'm open to full-time roles, contract engagements, and consulting conversations — particularly in technical enablement, customer education, and L&D at enterprise SaaS or cloud companies. If you're building a training program and need someone who understands both the human side and the technology side, I'd like to hear from you.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:hello@brennasheppard.com" class="contact-link">
+          <div class="contact-link-icon">✉️</div>
+          hello@brennasheppard.com
+        </a>
+        <a href="https://linkedin.com/in/brenna-sheppard" target="_blank" class="contact-link">
+          <div class="contact-link-icon">💼</div>
+          linkedin.com/in/brenna-sheppard
+        </a>
+        <a href="https://github.com/brennasheppard" target="_blank" class="contact-link">
+          <div class="contact-link-icon">🐙</div>
+          github.com/brennasheppard
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <div class="availability-card">
+        <div class="availability-title">OPEN TO</div>
+        <ul class="availability-list">
+          <li>Full-time positions (remote preferred)</li>
+          <li>Contract &amp; consulting engagements</li>
+          <li>Technical Enablement / Customer Education roles</li>
+          <li>L&amp;D Specialist &amp; Program Manager roles</li>
+          <li>Instructional design projects</li>
+          <li>Speaking &amp; PD facilitation</li>
+        </ul>
+      </div>
+      <div class="resume-card">
+        <p>Want the full picture? Download my resume for a complete view of experience, projects, and credentials.</p>
+        <a href="BSheppardresume2025.pdf" class="btn btn-primary" target="_blank" style="justify-content:center; width:100%;">
+          ↓ Download Resume (PDF)
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────── -->
+
+  <footer>
+    <p>© 2026 Brenna Sheppard · brennasheppard.com</p>
+    <p>
+      <a href="mailto:hello@brennasheppard.com">hello@brennasheppard.com</a>
+      &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/brenna-sheppard" target="_blank">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/brennasheppard" target="_blank">GitHub</a>
+    </p>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('themeToggle');
+    const root   = document.documentElement;
+
+    // Load saved preference
+    const saved = localStorage.getItem('bs-theme') || 'light';
+    root.setAttribute('data-theme', saved);
+    toggle.textContent = saved === 'dark' ? '☀️' : '🌙';
+
+    toggle.addEventListener('click', () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const next   = isDark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      toggle.textContent = next === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('bs-theme', next);
+    });
+
+    // Scroll-triggered fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
         }
-        createParticles();
+      });
+    }, { threshold: 0.1 });
 
-        // Create random sparkles
-        function createSparkles() {
-            const container = document.getElementById('sparkles');
-            const sparkleCount = 15;
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-            for (let i = 0; i < sparkleCount; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.textContent = '✦';
-                sparkle.style.left = Math.random() * 100 + '%';
-                sparkle.style.top = Math.random() * 100 + '%';
-                sparkle.style.animationDelay = Math.random() * 3 + 's';
-                sparkle.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
-                container.appendChild(sparkle);
-            }
-        }
-        createSparkles();
+    // Active nav link highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
 
-        // Typing Animation
-        const typingTexts = [
-            'Learning & Development Specialist',
-            'Instructional Designer',
-            'Corporate Trainer',
-            'EdTech Enthusiast',
-            'Curriculum Developer'
-        ];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingElement = document.getElementById('typingText');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 80) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === '#' + current
+          ? 'rgba(255,255,255,0.95)'
+          : '';
+      });
+    }, { passive: true });
+  </script>
 
-        function typeText() {
-            const currentText = typingTexts[textIndex];
-
-            if (isDeleting) {
-                typingElement.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingElement.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentText.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % typingTexts.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(typeText, typeSpeed);
-        }
-        typeText();
-
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const html = document.documentElement;
-
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        html.setAttribute('data-theme', currentTheme);
-        updateThemeIcon(currentTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        });
-
-        function updateThemeIcon(theme) {
-            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-        }
-
-        // Tab Navigation
-        const navLinks = document.querySelectorAll('.nav-link');
-        const tabContainers = document.querySelectorAll('.tab-container');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetTab = link.getAttribute('data-tab');
-                if (!targetTab) return;
-
-                // Update nav links active state
-                document.querySelectorAll('.nav-links .nav-link').forEach(l => l.classList.remove('active'));
-                document.querySelector(`.nav-links .nav-link[data-tab="${targetTab}"]`)?.classList.add('active');
-
-                // Hide all tabs and show target
-                tabContainers.forEach(tab => tab.classList.remove('active'));
-                document.getElementById(targetTab).classList.add('active');
-
-                // Close mobile menu
-                closeMenu();
-
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
-
-        // Mobile Menu
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinksContainer = document.getElementById('navLinks');
-        const header = document.getElementById('header');
-        let menuTimer;
-
-        menuToggle.addEventListener('click', () => {
-            const isActive = navLinksContainer.classList.toggle('active');
-            menuToggle.textContent = isActive ? '✕' : '☰';
-
-            if (isActive) {
-                clearTimeout(menuTimer);
-                menuTimer = setTimeout(() => {
-                    closeMenu();
-                }, 7000);
-            } else {
-                clearTimeout(menuTimer);
-            }
-        });
-
-        function closeMenu() {
-            navLinksContainer.classList.remove('active');
-            menuToggle.textContent = '☰';
-            clearTimeout(menuTimer);
-        }
-
-        // Hide header on scroll down, show on scroll up
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (navLinksContainer.classList.contains('active')) {
-                closeMenu();
-            }
-
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                header.classList.add('hidden');
-            } else {
-                header.classList.remove('hidden');
-            }
-
-            lastScrollTop = scrollTop;
-        }, false);
-
-        // Add playful cursor sparkle effect on click
-        document.addEventListener('click', (e) => {
-            const sparkle = document.createElement('div');
-            sparkle.textContent = '✦';
-            sparkle.style.cssText = `
-                position: fixed;
-                left: ${e.clientX}px;
-                top: ${e.clientY}px;
-                pointer-events: none;
-                font-size: 1.5rem;
-                color: var(--accent);
-                z-index: 9999;
-                animation: clickSparkle 0.6s ease-out forwards;
-            `;
-            document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 600);
-        });
-
-        // Add click sparkle animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes clickSparkle {
-                0% { transform: scale(0) rotate(0deg); opacity: 1; }
-                100% { transform: scale(2) rotate(180deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
 </body>
 </html>
