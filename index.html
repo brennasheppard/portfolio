@@ -937,10 +937,135 @@
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .case-outcomes { grid-template-columns: 1fr; }
     }
+
+    /* ── REMOTE CONTROL ──────────────────────────────────────── */
+    #remote-control {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    #remote-panel {
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 16px 14px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      min-width: 120px;
+    }
+
+    #remote-panel.open { display: flex; }
+
+    #remote-section-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      width: 100%;
+    }
+
+    #remote-section-name {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      text-align: center;
+      min-height: 20px;
+    }
+
+    .remote-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 10px 18px;
+      transition: background 0.15s;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .remote-btn:hover { background: rgba(255,255,255,0.18); }
+    .remote-btn:active { background: rgba(255,255,255,0.28); }
+
+    #remote-section-dots {
+      display: flex;
+      gap: 5px;
+      margin-top: 2px;
+    }
+
+    .remote-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .remote-dot.active { background: var(--teal2); }
+
+    #remote-toggle-btn {
+      background: var(--teal);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      cursor: pointer;
+      font-size: 20px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(13,115,119,0.45);
+      transition: background 0.15s, transform 0.15s;
+      flex-shrink: 0;
+    }
+
+    #remote-toggle-btn:hover { background: var(--teal2); transform: scale(1.08); }
+
+    #remote-keyboard-hint {
+      font-family: var(--font-body);
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      margin-top: 2px;
+    }
   </style>
 
 </head>
 <body>
+
+  <!-- ── REMOTE CONTROL ──────────────────────────────────────── -->
+  <div id="remote-control" aria-label="Presentation remote control">
+    <div id="remote-panel" role="navigation" aria-label="Section navigation">
+      <div id="remote-section-label">Section</div>
+      <div id="remote-section-name">Home</div>
+      <button class="remote-btn" id="remote-prev" aria-label="Previous section">&#8593;</button>
+      <button class="remote-btn" id="remote-next" aria-label="Next section">&#8595;</button>
+      <div id="remote-section-dots" aria-hidden="true"></div>
+      <div id="remote-keyboard-hint">&#8593; &#8595; arrow keys</div>
+    </div>
+    <button id="remote-toggle-btn" aria-label="Toggle remote control" title="Remote Control">&#9654;</button>
+  </div>
 
   <!-- ── NAVIGATION ──────────────────────────────────────────── -->
 
@@ -1574,6 +1699,69 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── REMOTE CONTROL ──────────────────────────────────────────
+    (function() {
+      const sectionIds = ['home','about','expertise','work','skills','certifications','contact'];
+      const sectionNames = ['Home','About','Expertise','Work','Skills','Certifications','Contact'];
+      let currentIdx = 0;
+
+      const panel = document.getElementById('remote-panel');
+      const toggleBtn = document.getElementById('remote-toggle-btn');
+      const prevBtn = document.getElementById('remote-prev');
+      const nextBtn = document.getElementById('remote-next');
+      const nameEl = document.getElementById('remote-section-name');
+      const dotsEl = document.getElementById('remote-section-dots');
+
+      // Build dots
+      sectionIds.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'remote-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('title', sectionNames[i]);
+        dot.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(dot);
+      });
+
+      function goTo(idx) {
+        currentIdx = Math.max(0, Math.min(sectionIds.length - 1, idx));
+        const el = document.getElementById(sectionIds[currentIdx]);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        nameEl.textContent = sectionNames[currentIdx];
+        dotsEl.querySelectorAll('.remote-dot').forEach((d, i) =>
+          d.classList.toggle('active', i === currentIdx));
+      }
+
+      prevBtn.addEventListener('click', () => goTo(currentIdx - 1));
+      nextBtn.addEventListener('click', () => goTo(currentIdx + 1));
+
+      toggleBtn.addEventListener('click', () => {
+        const open = panel.classList.toggle('open');
+        toggleBtn.setAttribute('aria-expanded', open);
+        toggleBtn.innerHTML = open ? '&#10005;' : '&#9654;';
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', e => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIdx + 1); }
+        if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  { e.preventDefault(); goTo(currentIdx - 1); }
+      });
+
+      // Sync currentIdx with scroll position
+      window.addEventListener('scroll', () => {
+        const allSections = sectionIds.map(id => document.getElementById(id));
+        let found = 0;
+        allSections.forEach((s, i) => {
+          if (s && window.scrollY >= s.offsetTop - 100) found = i;
+        });
+        if (found !== currentIdx) {
+          currentIdx = found;
+          nameEl.textContent = sectionNames[currentIdx];
+          dotsEl.querySelectorAll('.remote-dot').forEach((d, i) =>
+            d.classList.toggle('active', i === currentIdx));
+        }
+      }, { passive: true });
+    })();
 
     // Active nav link highlighting
     const sections = document.querySelectorAll('section[id]');
