@@ -686,7 +686,223 @@
             font-size: 1.1rem;
         }
 
-        /* About Section */
+        /* About Section - Editorial Layout with Avatar */
+        .about-editorial {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-editorial::before {
+            content: '✦';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--accent-light);
+            opacity: 0.3;
+            animation: twinkle 3s infinite;
+        }
+
+        .about-text-flow {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .about-text-flow p {
+            margin-bottom: 1.25rem;
+        }
+
+        .about-text-flow p:first-of-type::first-letter {
+            font-size: 3.5rem;
+            float: left;
+            line-height: 1;
+            padding-right: 0.5rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Anime Avatar with Text Wrap */
+        .avatar-float {
+            float: right;
+            width: 220px;
+            height: 220px;
+            margin: 0 0 1.5rem 2rem;
+            shape-outside: circle(50%);
+            clip-path: circle(50%);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .avatar-float:hover {
+            transform: scale(1.05);
+        }
+
+        .avatar-float.clicked {
+            animation: avatarBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes avatarBounce {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(0.95) rotate(-5deg); }
+            75% { transform: scale(1.05) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .avatar-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            box-shadow: 0 8px 32px var(--shadow);
+            transition: all 0.4s ease;
+        }
+
+        .avatar-float:hover .avatar-image {
+            border-color: var(--accent-light);
+            box-shadow: 0 12px 40px var(--shadow), 0 0 30px rgba(183, 110, 121, 0.3);
+        }
+
+        /* Placeholder avatar styling */
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            border: 4px solid var(--accent-light);
+            box-shadow: 0 8px 32px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255,255,255,0.1) 50%,
+                transparent 70%
+            );
+            animation: shimmerAvatar 3s infinite;
+        }
+
+        @keyframes shimmerAvatar {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .avatar-hint {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--accent);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .avatar-float:hover .avatar-hint {
+            opacity: 1;
+        }
+
+        /* Skills highlight in text */
+        .text-highlight {
+            color: var(--accent);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .text-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .text-highlight:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* About footer with values */
+        .about-values {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .value-tag {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .value-tag:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .value-tag::before {
+            content: '♡';
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .avatar-float {
+                float: none;
+                margin: 0 auto 2rem;
+                display: block;
+                shape-outside: none;
+            }
+
+            .about-text-flow {
+                text-align: left;
+            }
+
+            .about-editorial {
+                padding: 2rem;
+            }
+        }
+
+        /* Legacy about grid - keeping for fallback */
         .about-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -1112,31 +1328,44 @@
             </div>
         </div>
 
-        <!-- About Tab -->
+        <!-- About Tab - Editorial Layout with Avatar -->
         <div class="tab-container" id="about">
             <div class="section-header">
                 <h2>About Me</h2>
-                <p>Results-driven L&D professional with extensive experience across multiple industries</p>
+                <p>Click the avatar to see it come alive!</p>
             </div>
-            <div class="about-grid">
-                <div class="about-content">
-                    <p>I am a results-driven Learning & Development professional with 10+ years of experience designing and delivering impactful training solutions that drive measurable business outcomes. My background spans instructional design, corporate training, curriculum development, and educational technology implementation.</p>
-                    <p>Currently serving as a Digital Learning Specialist, I partner with organizations to implement technology-enhanced learning solutions, conduct customized professional development, and create scalable training programs. I excel at translating complex concepts into engaging learning experiences for adult learners across multiple delivery modalities.</p>
-                    <p>My expertise includes needs assessment, program design, LMS implementation, facilitation, and measurement of learning impact. I bring a unique blend of instructional expertise, project management skills, and technical proficiency to every engagement.</p>
-                    <p>Whether working as a trainer, consultant, instructional designer, or project lead, I am committed to creating learning solutions that align with organizational goals and deliver lasting performance improvement.</p>
+            <div class="about-editorial">
+                <div class="about-text-flow">
+                    <!-- Anime Avatar - Replace src with your AI-generated anime image -->
+                    <div class="avatar-float" id="avatarFloat" title="Click me!">
+                        <!-- Placeholder - Replace with your anime avatar image -->
+                        <div class="avatar-placeholder" id="avatarPlaceholder">
+                            ✦
+                        </div>
+                        <!-- Uncomment and add your image path when ready:
+                        <img src="images/anime-avatar.png" alt="Brenna Sheppard - Anime Avatar" class="avatar-image" id="avatarImage">
+                        -->
+                        <span class="avatar-hint">Click me! ✦</span>
+                    </div>
+
+                    <p>I am a results-driven <span class="text-highlight">Learning & Development professional</span> with over a decade of experience designing and delivering impactful training solutions that drive measurable business outcomes. My journey has taken me through the worlds of instructional design, corporate training, curriculum development, and educational technology implementation—each role adding new dimensions to my expertise.</p>
+
+                    <p>Currently serving as a <span class="text-highlight">Digital Learning Specialist</span>, I partner with organizations to implement technology-enhanced learning solutions, conduct customized professional development, and create scalable training programs. What truly excites me is translating complex concepts into engaging learning experiences for adult learners across multiple delivery modalities—whether that's a virtual workshop, an interactive e-learning module, or an in-person training session.</p>
+
+                    <p>My toolkit includes <span class="text-highlight">needs assessment</span>, program design, <span class="text-highlight">LMS implementation</span>, facilitation, and measurement of learning impact. I bring a unique blend of instructional expertise, project management skills, and technical proficiency to every engagement. Whether working as a trainer, consultant, instructional designer, or project lead, I am committed to creating learning solutions that align with organizational goals and deliver lasting performance improvement.</p>
+
+                    <p>When I'm not crafting learning experiences, you'll find me exploring new EdTech tools, staying current with industry trends, and continuously expanding my own skillset—because in L&D, we never stop learning!</p>
                 </div>
-                <div class="value-props">
-                    <h3>What I Bring</h3>
-                    <ul class="value-list">
-                        <li>Adult learning expertise</li>
-                        <li>Instructional design</li>
-                        <li>Multi-industry experience</li>
-                        <li>Technology integration</li>
-                        <li>Data-driven approach</li>
-                        <li>Facilitation skills</li>
-                        <li>Project management</li>
-                        <li>Consultant mindset</li>
-                    </ul>
+
+                <div class="about-values">
+                    <span class="value-tag">Adult Learning</span>
+                    <span class="value-tag">Instructional Design</span>
+                    <span class="value-tag">Multi-industry</span>
+                    <span class="value-tag">Technology</span>
+                    <span class="value-tag">Data-driven</span>
+                    <span class="value-tag">Facilitation</span>
+                    <span class="value-tag">Project Management</span>
+                    <span class="value-tag">Consulting</span>
                 </div>
             </div>
         </div>
@@ -1631,6 +1860,69 @@
             }
         `;
         document.head.appendChild(style);
+
+        // Avatar Click Interaction
+        const avatarFloat = document.getElementById('avatarFloat');
+        if (avatarFloat) {
+            avatarFloat.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent the general click sparkle
+
+                // Add bounce animation class
+                avatarFloat.classList.add('clicked');
+
+                // Create burst of sparkles around avatar
+                const rect = avatarFloat.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                for (let i = 0; i < 8; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.textContent = '✦';
+                    const angle = (i / 8) * Math.PI * 2;
+                    const distance = 80;
+                    const x = centerX + Math.cos(angle) * distance;
+                    const y = centerY + Math.sin(angle) * distance;
+
+                    sparkle.style.cssText = `
+                        position: fixed;
+                        left: ${centerX}px;
+                        top: ${centerY}px;
+                        pointer-events: none;
+                        font-size: 1.2rem;
+                        color: var(--accent);
+                        z-index: 9999;
+                        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                        opacity: 1;
+                    `;
+                    document.body.appendChild(sparkle);
+
+                    // Animate outward
+                    requestAnimationFrame(() => {
+                        sparkle.style.left = x + 'px';
+                        sparkle.style.top = y + 'px';
+                        sparkle.style.opacity = '0';
+                        sparkle.style.transform = 'scale(1.5) rotate(180deg)';
+                    });
+
+                    setTimeout(() => sparkle.remove(), 500);
+                }
+
+                // Remove animation class after it completes
+                setTimeout(() => {
+                    avatarFloat.classList.remove('clicked');
+                }, 600);
+            });
+
+            // Add floating animation to avatar
+            let floatOffset = 0;
+            function animateFloat() {
+                floatOffset += 0.02;
+                const y = Math.sin(floatOffset) * 5;
+                avatarFloat.style.transform = `translateY(${y}px)`;
+                requestAnimationFrame(animateFloat);
+            }
+            animateFloat();
+        }
     </script>
 </body>
 </html>
