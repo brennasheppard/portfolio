@@ -709,11 +709,13 @@
         }
 
         .about-text-flow {
+            position: relative;
             font-size: 1.1rem;
             line-height: 1.9;
             color: var(--text-secondary);
             text-align: justify;
             hyphens: auto;
+            min-height: 400px;
         }
 
         .about-text-flow p {
@@ -729,34 +731,19 @@
             font-weight: 700;
         }
 
-        /* Anime Avatar with Bubble Effect */
+        /* Anime Avatar with Bubble Effect - Free floating through text */
         .avatar-float {
-            position: sticky;
-            top: 100px;
-            float: right;
-            width: 150px;
-            height: 150px;
-            margin: 0 0 1rem 1.5rem;
+            position: absolute;
+            width: 140px;
+            height: 140px;
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            animation: bubbleDrift 8s ease-in-out infinite, bubbleBreathe 3s ease-in-out infinite;
-            z-index: 10;
+            z-index: 100;
+            pointer-events: auto;
+            /* No CSS animation - JS controls position for text reflow */
         }
 
-        /* Scroll-aware bubble - bounces slightly on scroll */
-        .avatar-float.scrolling {
-            animation: bubbleScroll 0.3s ease-out, bubbleBreathe 3s ease-in-out infinite;
-        }
-
-        @keyframes bubbleScroll {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-8px) rotate(3deg); }
-            100% { transform: translateY(0); }
-        }
-
-        /* Hover effect */
         .avatar-float:hover {
-            animation: bubbleWobble 0.5s ease-in-out, bubbleBreathe 3s ease-in-out infinite;
+            transform: scale(1.08);
         }
 
         .avatar-float.popped {
@@ -764,27 +751,10 @@
             pointer-events: none;
         }
 
-        @keyframes bubbleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-8px) rotate(1deg); }
-            75% { transform: translateY(5px) rotate(-1deg); }
-        }
-
-        /* More autonomous wandering movement */
-        @keyframes bubbleDrift {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            15% { transform: translate(-12px, -8px) rotate(-2deg); }
-            30% { transform: translate(8px, -15px) rotate(3deg); }
-            45% { transform: translate(-5px, 5px) rotate(-1deg); }
-            60% { transform: translate(15px, -5px) rotate(2deg); }
-            75% { transform: translate(-8px, -12px) rotate(-3deg); }
-            90% { transform: translate(5px, 8px) rotate(1deg); }
-        }
-
         /* Gentle breathing/pulsing */
         @keyframes bubbleBreathe {
-            0%, 100% { scale: 1; }
-            50% { scale: 1.05; }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
         }
 
         @keyframes bubblePop {
@@ -800,35 +770,21 @@
             75% { transform: scale(1.04) rotate(1deg); }
         }
 
-        /* Interactive text words - Pretext-style */
+        /* Interactive text words - pushed by floating bubble */
         .about-text-flow .interactive-word {
-            display: inline;
-            transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.15s ease;
-            position: relative;
+            display: inline-block;
+            transition: transform 0.15s ease-out, color 0.2s ease, text-shadow 0.2s ease;
+            will-change: transform;
         }
 
         .about-text-flow .interactive-word.near-bubble {
-            color: var(--accent);
-            text-shadow: 0 0 10px rgba(183, 110, 121, 0.5);
+            z-index: 5;
         }
 
-        .about-text-flow .interactive-word.very-near {
-            color: var(--accent-light);
-            text-shadow: 0 0 20px rgba(183, 110, 121, 0.7), 0 0 30px rgba(212, 165, 165, 0.4);
-            font-weight: 500;
-        }
-
-        /* Text flows dynamically - no shape-outside needed with pretext approach */
+        /* Text container */
         .about-text-flow p {
-            transition: all 0.1s ease;
-            line-height: 1.8;
-        }
-
-        /* Glowing highlights near bubble */
-        .about-text-flow .text-highlight.very-near {
-            background: linear-gradient(90deg, rgba(183, 110, 121, 0.3), rgba(212, 165, 165, 0.2));
-            padding: 0 4px;
-            border-radius: 3px;
+            line-height: 1.9;
+            margin-bottom: 1.25rem;
         }
 
         /* Bubble container */
@@ -2133,256 +2089,191 @@
             });
 
             // ═══════════════════════════════════════════════════════════
-            // PRETEXT-INSPIRED EDITORIAL ENGINE
-            // Fast canvas-based text measurement with dynamic reflow
+            // FLOATING BUBBLE ENGINE
+            // Bubble floats through text, pushing words aside
             // ═══════════════════════════════════════════════════════════
 
             const textFlow = document.querySelector('.about-text-flow');
             const aboutSection = document.querySelector('.about-editorial');
 
             if (textFlow && aboutSection) {
-                // Create measurement canvas (pretext approach: no DOM reflow)
-                const measureCanvas = document.createElement('canvas');
-                const ctx = measureCanvas.getContext('2d');
+                // Bubble position state (controlled by JS, not CSS)
+                let bubbleX = textFlow.offsetWidth - 100; // Start at right
+                let bubbleY = 50; // Start near top
+                let targetX = bubbleX;
+                let targetY = bubbleY;
+                let velocityX = 0;
+                let velocityY = 0;
+                let scrollOffset = 0;
+                let time = 0;
 
-                // Get computed font from the text
-                const computedStyle = getComputedStyle(textFlow);
-                const font = `${computedStyle.fontSize} ${computedStyle.fontFamily}`;
-                ctx.font = font;
+                // Set initial bubble position
+                avatarFloat.style.right = 'auto';
+                avatarFloat.style.left = bubbleX + 'px';
+                avatarFloat.style.top = bubbleY + 'px';
 
-                // Store original paragraph data
+                // Wrap all text words in spans for interaction
                 const paragraphs = textFlow.querySelectorAll('p');
-                const paragraphData = [];
+                const allWords = [];
 
-                paragraphs.forEach((p, idx) => {
+                paragraphs.forEach(p => {
                     if (p.dataset.processed) return;
                     p.dataset.processed = 'true';
 
-                    // Extract text content and highlights
-                    const text = p.textContent;
-                    const highlights = [];
-                    p.querySelectorAll('.text-highlight').forEach(h => {
-                        highlights.push(h.textContent);
-                    });
-
-                    paragraphData.push({ element: p, text, highlights, originalHTML: p.innerHTML });
+                    const html = p.innerHTML;
+                    // Wrap words, preserving existing spans
+                    const wrapped = html.replace(/(\b\w+\b)(?![^<]*>)/g, '<span class="interactive-word">$1</span>');
+                    p.innerHTML = wrapped;
                 });
 
-                // Segment text into words (like pretext's Intl.Segmenter approach)
-                function segmentText(text) {
-                    // Use word boundaries for segmentation
-                    const words = [];
-                    const regex = /(\S+)(\s*)/g;
-                    let match;
-                    while ((match = regex.exec(text)) !== null) {
-                        words.push({ word: match[1], space: match[2] });
-                    }
-                    return words;
-                }
-
-                // Measure word width using canvas (pretext's core innovation)
-                function measureWord(word) {
-                    return ctx.measureText(word).width;
-                }
-
-                // Calculate available width at a given Y position relative to bubble
-                function getAvailableWidth(y, bubbleRect, containerRect, bubbleRadius) {
-                    const bubbleCenterY = bubbleRect.top + bubbleRect.height / 2 - containerRect.top;
-                    const bubbleCenterX = bubbleRect.left + bubbleRect.width / 2 - containerRect.left;
-                    const containerWidth = containerRect.width;
-
-                    // Check if this line intersects with the bubble
-                    const dy = Math.abs(y - bubbleCenterY);
-                    if (dy < bubbleRadius) {
-                        // Calculate horizontal intrusion of bubble at this Y
-                        const intrusion = Math.sqrt(bubbleRadius * bubbleRadius - dy * dy);
-                        const bubbleLeft = bubbleCenterX - intrusion;
-                        const bubbleRight = bubbleCenterX + intrusion;
-
-                        // Bubble is floated right, so reduce width from right side
-                        if (bubbleRight > containerWidth - 20) {
-                            return Math.max(50, bubbleLeft - 20); // 20px margin
-                        }
-                    }
-                    return containerWidth;
-                }
-
-                // Layout text with variable line widths (like pretext's layoutNextLineRange)
-                function layoutText(words, containerRect, bubbleRect, lineHeight) {
-                    const lines = [];
-                    let currentLine = [];
-                    let currentWidth = 0;
-                    let y = lineHeight;
-                    const bubbleRadius = bubbleRect ? (bubbleRect.width / 2) + 25 : 0; // Extra margin
-
-                    words.forEach(({ word, space }) => {
-                        const wordWidth = measureWord(word + space);
-                        const availableWidth = bubbleRect ?
-                            getAvailableWidth(y, bubbleRect, containerRect, bubbleRadius) :
-                            containerRect.width;
-
-                        if (currentWidth + wordWidth > availableWidth && currentLine.length > 0) {
-                            // Wrap to next line
-                            lines.push({ words: currentLine, y, width: availableWidth });
-                            currentLine = [];
-                            currentWidth = 0;
-                            y += lineHeight;
-                        }
-
-                        currentLine.push({ word, space, width: wordWidth });
-                        currentWidth += wordWidth;
+                // Collect all word elements
+                function collectWords() {
+                    allWords.length = 0;
+                    textFlow.querySelectorAll('.interactive-word').forEach(word => {
+                        allWords.push(word);
                     });
+                }
+                collectWords();
 
-                    if (currentLine.length > 0) {
-                        lines.push({ words: currentLine, y, width: containerRect.width });
-                    }
+                // Autonomous floating motion
+                function updateBubbleTarget() {
+                    time += 0.02;
+                    const containerWidth = textFlow.offsetWidth;
+                    const containerHeight = textFlow.offsetHeight;
 
-                    return lines;
+                    // Gentle wandering pattern
+                    const wanderX = Math.sin(time * 0.5) * 60 + Math.sin(time * 0.3) * 30;
+                    const wanderY = Math.cos(time * 0.4) * 40 + Math.sin(time * 0.6) * 20;
+
+                    // Base position: right side, following scroll
+                    const baseX = containerWidth - 120 + wanderX;
+                    const baseY = 60 + scrollOffset + wanderY;
+
+                    // Clamp to container
+                    targetX = Math.max(80, Math.min(containerWidth - 160, baseX));
+                    targetY = Math.max(20, Math.min(containerHeight - 160, baseY));
                 }
 
-                // Render text with word spans for interaction
-                function renderParagraph(p, data, bubbleRect) {
-                    const containerRect = textFlow.getBoundingClientRect();
-                    const lineHeight = parseFloat(computedStyle.lineHeight) || 26;
-                    const words = segmentText(data.text);
-                    const lines = layoutText(words, containerRect, bubbleRect, lineHeight);
-
-                    // Build HTML with interactive words
-                    let html = '';
-                    const bubbleCenterX = bubbleRect ? bubbleRect.left + bubbleRect.width / 2 : 0;
-                    const bubbleCenterY = bubbleRect ? bubbleRect.top + bubbleRect.height / 2 : 0;
-
-                    lines.forEach(line => {
-                        line.words.forEach(({ word, space }) => {
-                            // Check if this word is a highlight
-                            const isHighlight = data.highlights.some(h => h.includes(word) && word.length > 3);
-
-                            // Calculate proximity class
-                            let proximityClass = '';
-                            if (bubbleRect && line.width < containerRect.width - 50) {
-                                proximityClass = 'near-bubble';
-                                if (line.width < containerRect.width - 100) {
-                                    proximityClass = 'very-near';
-                                }
-                            }
-
-                            if (isHighlight) {
-                                html += `<span class="text-highlight interactive-word ${proximityClass}">${word}</span>${space}`;
-                            } else {
-                                html += `<span class="interactive-word ${proximityClass}">${word}</span>${space}`;
-                            }
-                        });
-                    });
-
-                    p.innerHTML = html;
-                }
-
-                // Initial render
-                function updateTextLayout() {
+                // Smooth bubble movement
+                function moveBubble() {
                     if (bubblePopped) return;
+
+                    // Spring physics for smooth following
+                    const dx = targetX - bubbleX;
+                    const dy = targetY - bubbleY;
+                    velocityX += dx * 0.03;
+                    velocityY += dy * 0.03;
+                    velocityX *= 0.92; // Damping
+                    velocityY *= 0.92;
+
+                    bubbleX += velocityX;
+                    bubbleY += velocityY;
+
+                    // Apply position
+                    avatarFloat.style.left = bubbleX + 'px';
+                    avatarFloat.style.top = bubbleY + 'px';
+
+                    // Slight rotation based on velocity
+                    const rotation = velocityX * 0.5;
+                    const scale = 1 + Math.abs(velocityY) * 0.005;
+                    avatarFloat.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+                }
+
+                // Push words away from bubble
+                function updateWordPositions() {
+                    if (bubblePopped) return;
+
                     const bubbleRect = avatarFloat.getBoundingClientRect();
-                    paragraphData.forEach(data => {
-                        renderParagraph(data.element, data, bubbleRect);
+                    const bubbleCenterX = bubbleRect.left + bubbleRect.width / 2;
+                    const bubbleCenterY = bubbleRect.top + bubbleRect.height / 2;
+                    const bubbleRadius = bubbleRect.width / 2 + 30; // Interaction radius
+
+                    allWords.forEach(word => {
+                        const rect = word.getBoundingClientRect();
+                        const wordCenterX = rect.left + rect.width / 2;
+                        const wordCenterY = rect.top + rect.height / 2;
+
+                        const dx = wordCenterX - bubbleCenterX;
+                        const dy = wordCenterY - bubbleCenterY;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < bubbleRadius && distance > 0) {
+                            // Push word away from bubble
+                            const force = (bubbleRadius - distance) / bubbleRadius;
+                            const pushX = (dx / distance) * force * 25;
+                            const pushY = (dy / distance) * force * 8;
+
+                            word.style.transform = `translate(${pushX}px, ${pushY}px)`;
+                            word.style.color = 'var(--accent)';
+                            word.style.textShadow = `0 0 ${force * 15}px rgba(183, 110, 121, ${force * 0.6})`;
+                            word.classList.add('near-bubble');
+                        } else {
+                            word.style.transform = '';
+                            word.style.color = '';
+                            word.style.textShadow = '';
+                            word.classList.remove('near-bubble');
+                        }
                     });
                 }
 
-                // Debounced update for performance
-                let layoutTimeout;
-                function debouncedUpdate() {
-                    clearTimeout(layoutTimeout);
-                    layoutTimeout = setTimeout(updateTextLayout, 16); // ~60fps
-                }
-
-                // Update on bubble animation (every frame during drift)
-                let animationFrame;
-                function trackBubble() {
+                // Animation loop
+                function animate() {
                     if (bubblePopped) {
-                        cancelAnimationFrame(animationFrame);
-                        // Restore original text when bubble is gone
-                        paragraphData.forEach(data => {
-                            data.element.innerHTML = data.originalHTML;
+                        // Reset all words when bubble pops
+                        allWords.forEach(word => {
+                            word.style.transform = '';
+                            word.style.color = '';
+                            word.style.textShadow = '';
                         });
                         return;
                     }
-                    debouncedUpdate();
-                    animationFrame = requestAnimationFrame(trackBubble);
+
+                    updateBubbleTarget();
+                    moveBubble();
+                    updateWordPositions();
+                    requestAnimationFrame(animate);
                 }
 
-                // Start tracking after a short delay for initial render
-                setTimeout(() => {
-                    updateTextLayout();
-                    trackBubble();
-                }, 100);
+                // Start animation
+                setTimeout(animate, 100);
 
-                // Also update on window resize
-                window.addEventListener('resize', debouncedUpdate);
-
-                // Mouse proximity effect (enhanced with pretext measurements)
-                document.addEventListener('mousemove', (e) => {
-                    if (bubblePopped) return;
-                    const rect = avatarFloat.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    const bubbleDistance = Math.sqrt(
-                        Math.pow(e.clientX - centerX, 2) +
-                        Math.pow(e.clientY - centerY, 2)
-                    );
-
-                    // Bubble wobbles toward mouse
-                    if (bubbleDistance < 200 && bubbleDistance > 50) {
-                        const wobbleX = (e.clientX - centerX) / 30;
-                        const wobbleY = (e.clientY - centerY) / 30;
-                        avatarFloat.style.transform = `translate(${wobbleX}px, ${wobbleY}px)`;
-                    }
-                });
-
-                // Reset on mouse leave
-                aboutSection.addEventListener('mouseleave', () => {
-                    avatarFloat.style.transform = '';
-                });
-
-                // ═══════════════════════════════════════════════════════════
-                // SCROLL-FOLLOWING BUBBLE
-                // Bubble bounces and reacts as you scroll down the page
-                // ═══════════════════════════════════════════════════════════
-
-                let lastScrollY = window.scrollY;
-                let scrollTimeout;
-                let isScrolling = false;
-
+                // Scroll moves bubble down
                 window.addEventListener('scroll', () => {
                     if (bubblePopped) return;
 
-                    const currentScrollY = window.scrollY;
-                    const scrollDelta = currentScrollY - lastScrollY;
-                    const scrollSpeed = Math.abs(scrollDelta);
+                    const aboutRect = aboutSection.getBoundingClientRect();
+                    const viewportCenter = window.innerHeight / 2;
 
-                    // Add scrolling class for bounce animation
-                    if (!isScrolling && scrollSpeed > 5) {
-                        isScrolling = true;
-                        avatarFloat.classList.add('scrolling');
-
-                        // Apply a slight offset based on scroll direction
-                        const bounceY = scrollDelta > 0 ? -10 : 10;
-                        const bounceRotate = scrollDelta > 0 ? 5 : -5;
-                        avatarFloat.style.transform = `translateY(${bounceY}px) rotate(${bounceRotate}deg)`;
+                    // Move bubble to stay in viewport when scrolling through about section
+                    if (aboutRect.top < viewportCenter && aboutRect.bottom > viewportCenter) {
+                        scrollOffset = Math.min(
+                            textFlow.offsetHeight - 200,
+                            Math.max(0, viewportCenter - aboutRect.top - 100)
+                        );
                     }
-
-                    // Clear previous timeout
-                    clearTimeout(scrollTimeout);
-
-                    // Remove scrolling state after scroll stops
-                    scrollTimeout = setTimeout(() => {
-                        isScrolling = false;
-                        avatarFloat.classList.remove('scrolling');
-                        avatarFloat.style.transform = '';
-
-                        // Trigger text reflow after scroll settles
-                        debouncedUpdate();
-                    }, 150);
-
-                    lastScrollY = currentScrollY;
                 }, { passive: true });
+
+                // Mouse attracts bubble slightly
+                document.addEventListener('mousemove', (e) => {
+                    if (bubblePopped) return;
+
+                    const aboutRect = aboutSection.getBoundingClientRect();
+                    if (e.clientX > aboutRect.left && e.clientX < aboutRect.right &&
+                        e.clientY > aboutRect.top && e.clientY < aboutRect.bottom) {
+                        // Mouse is in about section - bubble is slightly attracted
+                        const localX = e.clientX - aboutRect.left;
+                        const localY = e.clientY - aboutRect.top + textFlow.scrollTop;
+
+                        targetX += (localX - targetX) * 0.02;
+                        targetY += (localY - targetY) * 0.02;
+                    }
+                });
+
+                // Resize handling
+                window.addEventListener('resize', () => {
+                    collectWords();
+                    bubbleX = Math.min(bubbleX, textFlow.offsetWidth - 160);
+                });
             }
         }
     </script>
