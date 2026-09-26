@@ -45,12 +45,28 @@
     .role { margin: 4px 0 0; color: var(--blue); font-weight: 650; }
     .org { margin: 2px 0 0; color: var(--muted); font-size: .92rem; }
     .card {
+      position: relative;
       background: var(--card);
       border-radius: 16px;
       padding: 18px 18px 8px;
       margin-top: 22px;
       box-shadow: 0 8px 28px rgba(15,40,80,.08);
     }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: .88rem;
+      font-weight: 650;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .close:hover { color: var(--navy); background: #eef4fb; }
     .actions a {
       display: block;
       text-align: center;
@@ -65,6 +81,13 @@
     .ghost {
       background: #eef4fb;
       color: var(--navy);
+    }
+    .actions a.ghost small {
+      display: block;
+      margin-top: 2px;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--muted);
     }
     .links { margin: 8px 0 16px; }
     .links a {
@@ -94,9 +117,6 @@
       border-radius: 12px;
       font-size: .9rem;
     }
-    .help { font-size: .88rem; color: var(--muted); }
-    .help strong { color: var(--navy); display: block; margin: 12px 0 4px; }
-    .help ul { margin: 0 0 8px; padding-left: 1.1rem; }
     footer {
       text-align: center;
       margin-top: 22px;
@@ -117,10 +137,14 @@
     </header>
 
     <section class="card">
+      <button type="button" class="close" onclick="if (history.length > 1) history.back(); else { window.close(); location.href='https://brennasheppard.com/card'; }">Close</button>
       <div class="actions">
         <a class="primary" href="brenna.vcf">Add to Contacts</a>
         <a class="ghost" href="tel:+18302728353">Call 830-272-8353</a>
         <a class="ghost" href="mailto:brenna.sheppard@comalisd.org">Email Brenna</a>
+        <a class="ghost" href="https://calendly.com/bsheppard-getcleartouch/campus-planning-with-clear-touch">Plan — Clear Touch Campus Planning <small>30 or 60 min</small></a>
+        <a class="ghost" href="https://calendly.com/bsheppard-getcleartouch/pd">Train — Campus Clear Touch Training <small>30 min · 1 hr · 3 hr · full day</small></a>
+        <a class="ghost" href="https://calendly.com/bsheppard-getcleartouch/teachers_cleartouch">Implement — Clear Touch Classroom Support <small>30 min · 1 hr · 3 hr · full day</small></a>
       </div>
 
       <div class="split">
@@ -132,21 +156,6 @@
         <a href="https://brennasheppard.com">Portfolio <span>brennasheppard.com</span></a>
         <a href="https://linkedin.com/in/brenna-sheppard">LinkedIn <span>brenna-sheppard</span></a>
       </nav>
-
-      <div class="help">
-        <strong>Need help today?</strong>
-        <ul>
-          <li>Panel or app troubleshooting on the spot</li>
-          <li>Accessory setup &amp; resets</li>
-          <li>Quick how-tos between classes</li>
-        </ul>
-        <strong>Planning ahead?</strong>
-        <ul>
-          <li>PD, coaching, or a classroom visit</li>
-          <li>Comal U courses &amp; certifications</li>
-          <li>Lesson ideas built around your panel</li>
-        </ul>
-      </div>
     </section>
 
     <footer>
