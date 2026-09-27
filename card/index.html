@@ -5,18 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Brenna Sheppard · Clear Touch Specialist</title>
   <meta name="description" content="Contact Brenna Sheppard, Clear Touch Specialist for Comal ISD." />
-  <meta name="theme-color" content="#0b4f8a" />
+  <meta name="theme-color" content="#b76e79" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>BS</text></svg>" />
   <style>
     :root {
-      --navy: #0b3d6e;
-      --blue: #1565c0;
-      --sky: #1e88e5;
-      --ink: #1a2332;
-      --muted: #5b6775;
-      --line: #e4eaf1;
-      --bg: #f4f7fb;
-      --card: #ffffff;
+      --bg: #fff5f7;
+      --bg-secondary: #ffeef1;
+      --card: #fff9fa;
+      --ink: #2d2428;
+      --muted: #5a4a4e;
+      --accent: #b76e79;
+      --accent-light: #d4a5a5;
+      --accent-hover: #9a5a64;
+      --line: #e8d0d4;
+      --shadow: rgba(183, 110, 121, 0.15);
     }
     * { box-sizing: border-box; }
     body {
@@ -26,7 +28,7 @@
       color: var(--ink);
       line-height: 1.45;
     }
-    .bar { height: 10px; background: linear-gradient(90deg, var(--navy), var(--sky)); }
+    .bar { height: 10px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
     .wrap {
       max-width: 420px;
       margin: 0 auto;
@@ -37,36 +39,21 @@
       width: 96px; height: 96px;
       border-radius: 50%;
       margin: 0 auto 14px;
-      background: var(--navy) url("photo.jpg") center/cover no-repeat;
+      background: var(--accent) url("photo.jpg") center/cover no-repeat;
       border: 3px solid #fff;
-      box-shadow: 0 4px 16px rgba(11,61,110,.18);
+      box-shadow: 0 4px 16px var(--shadow);
     }
-    h1 { margin: 0; font-size: 1.55rem; color: var(--navy); letter-spacing: -0.02em; }
-    .role { margin: 4px 0 0; color: var(--blue); font-weight: 650; }
+    h1 { margin: 0; font-size: 1.55rem; color: var(--ink); letter-spacing: -0.02em; }
+    .role { margin: 4px 0 0; color: var(--accent); font-weight: 650; }
     .org { margin: 2px 0 0; color: var(--muted); font-size: .92rem; }
     .card {
-      position: relative;
       background: var(--card);
       border-radius: 16px;
       padding: 18px 18px 8px;
       margin-top: 22px;
-      box-shadow: 0 8px 28px rgba(15,40,80,.08);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 28px var(--shadow);
     }
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      font: inherit;
-      font-size: .88rem;
-      font-weight: 650;
-      padding: 6px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .close:hover { color: var(--navy); background: #eef4fb; }
     .actions a {
       display: block;
       text-align: center;
@@ -76,19 +63,13 @@
       margin-bottom: 10px;
       font-weight: 650;
     }
-    .primary { background: var(--blue); color: #fff; }
-    .primary:hover { background: var(--navy); }
+    .primary { background: var(--accent); color: #fff; }
+    .primary:hover { background: var(--accent-hover); }
     .ghost {
-      background: #eef4fb;
-      color: var(--navy);
+      background: var(--bg-secondary);
+      color: var(--accent);
     }
-    .actions a.ghost small {
-      display: block;
-      margin-top: 2px;
-      font-size: .78rem;
-      font-weight: 500;
-      color: var(--muted);
-    }
+    .ghost:hover { background: var(--accent-light); color: #fff; }
     .links { margin: 8px 0 16px; }
     .links a {
       display: flex;
@@ -110,8 +91,8 @@
     .split a {
       text-align: center;
       text-decoration: none;
-      background: #eef4fb;
-      color: var(--navy);
+      background: var(--bg-secondary);
+      color: var(--accent);
       font-weight: 650;
       padding: 12px 8px;
       border-radius: 12px;
@@ -123,7 +104,7 @@
       color: var(--muted);
       font-size: .8rem;
     }
-    footer a { color: var(--blue); }
+    footer a { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -137,25 +118,19 @@
     </header>
 
     <section class="card">
-      <button type="button" class="close" onclick="if (history.length > 1) history.back(); else { window.close(); location.href='https://brennasheppard.com/card'; }">Close</button>
       <div class="actions">
         <a class="primary" href="brenna.vcf">Add to Contacts</a>
         <a class="ghost" href="tel:+18302728353">Call 830-272-8353</a>
         <a class="ghost" href="mailto:brenna.sheppard@comalisd.org">Email Brenna</a>
-        <a class="ghost" href="https://calendly.com/bsheppard-getcleartouch/campus-planning-with-clear-touch">Plan — Clear Touch Campus Planning <small>30 or 60 min</small></a>
-        <a class="ghost" href="https://calendly.com/bsheppard-getcleartouch/pd">Train — Campus Clear Touch Training <small>30 min · 1 hr · 3 hr · full day</small></a>
-        <a class="ghost" href="https://calendly.com/bsheppard-getcleartouch/teachers_cleartouch">Implement — Clear Touch Classroom Support <small>30 min · 1 hr · 3 hr · full day</small></a>
+        <a class="ghost" href="https://tinyurl.com/ClearTouchResource">Resources</a>
+        <a class="ghost" href="https://brennasheppard.com">Portfolio</a>
+        <a class="ghost" href="https://calendly.com/bsheppard-getcleartouch">Book with Me</a>
       </div>
 
       <div class="split">
-        <a href="https://tinyurl.com/ClearTouchResource">Resources</a>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSch1bsWkbU_dD-qrBAdsSPlCjpZh9-zoiu3c0S_oudX6o5vRg/viewform?usp=send_form">Feedback</a>
+        <a href="https://linkedin.com/in/brenna-sheppard">LinkedIn</a>
       </div>
-
-      <nav class="links">
-        <a href="https://brennasheppard.com">Portfolio <span>brennasheppard.com</span></a>
-        <a href="https://linkedin.com/in/brenna-sheppard">LinkedIn <span>brenna-sheppard</span></a>
-      </nav>
     </section>
 
     <footer>
