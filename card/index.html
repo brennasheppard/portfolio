@@ -86,7 +86,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin: 6px 0 16px;
+      margin: 0 0 10px;
     }
     .split a {
       text-align: center;
@@ -98,6 +98,21 @@
       border-radius: 12px;
       font-size: .9rem;
     }
+    .split a:hover { background: var(--accent-light); color: #fff; }
+    .split a:hover span { color: #fff; }
+    .split.contact a {
+      padding: 10px 8px;
+      line-height: 1.25;
+    }
+    .split.contact span {
+      display: block;
+      margin-top: 3px;
+      font-size: .72rem;
+      font-weight: 550;
+      color: var(--muted);
+      word-break: break-all;
+    }
+    .split.secondary { margin: 6px 0 16px; }
     footer {
       text-align: center;
       margin-top: 22px;
@@ -120,14 +135,20 @@
     <section class="card">
       <div class="actions">
         <a class="primary" href="brenna.vcf">Add to Contacts</a>
-        <a class="ghost" href="tel:+18302728353">Call 830-272-8353</a>
-        <a class="ghost" href="mailto:brenna.sheppard@comalisd.org">Email Brenna</a>
+      </div>
+
+      <div class="split contact">
+        <a href="tel:+18302728353">Call <span>830-272-8353</span></a>
+        <a href="mailto:brenna.sheppard@comalisd.org">Email <span>brenna.sheppard@comalisd.org</span></a>
+      </div>
+
+      <div class="actions">
         <a class="ghost" href="https://tinyurl.com/ClearTouchResource">Resources</a>
         <a class="ghost" href="https://brennasheppard.com">Portfolio</a>
         <a class="ghost" href="https://calendly.com/bsheppard-getcleartouch">Book with Me</a>
       </div>
 
-      <div class="split">
+      <div class="split secondary">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSch1bsWkbU_dD-qrBAdsSPlCjpZh9-zoiu3c0S_oudX6o5vRg/viewform?usp=send_form">Feedback</a>
         <a href="https://linkedin.com/in/brenna-sheppard">LinkedIn</a>
       </div>
